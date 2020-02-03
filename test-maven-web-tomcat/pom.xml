@@ -45,6 +45,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
 
 
  	</dependencies>
@@ -52,14 +58,16 @@
   <build>
     <finalName>test-maven-web-tomcat</finalName>
 	<plugins>
-	  <plugin>
-	    <artifactId>maven-compiler-plugin</artifactId>
-	      <configuration>
-	        <source>1.8</source>
-	        <target>1.8</target>
-	      </configuration>
-	  </plugin>
-	  
+	
+		<plugin>
+		  <artifactId>maven-compiler-plugin</artifactId>
+		    <configuration>
+		      <source>1.8</source>
+		      <target>1.8</target>
+		    </configuration>
+		</plugin>
+	
 	</plugins>
+	
 </build>
 </project>
