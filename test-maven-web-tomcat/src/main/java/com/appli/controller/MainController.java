@@ -19,4 +19,10 @@ public class MainController {
 		
 		return "view";
 	}
+
+	@GetMapping(value ="/view2")
+	String getView2() {
+		
+		return "view2";
+	}
 }
