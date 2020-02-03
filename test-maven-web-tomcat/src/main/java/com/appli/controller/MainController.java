@@ -24,6 +24,7 @@ public class MainController {
 	@GetMapping(value ="/view")
 	String getView() {
 		
+		String x = "1";
 		return "view";
 	}
 
