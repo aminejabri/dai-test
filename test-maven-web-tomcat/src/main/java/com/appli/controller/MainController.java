@@ -7,29 +7,45 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.appli.entity.Customer;
+import com.appli.serivce.TestService;
+
+
 @Controller
 @RequestMapping(value ="/")
 public class MainController {
-
 	
-	MainController(){
-		
-	}
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    private TestService service;
+	
 	
 	@GetMapping(value ="/view")
 	String getView() {
 		
+		service.save(new Customer("test","test","test"));
 		return "view";
 	}
 
+
+
+    @Transactional
 	@GetMapping(value ="/view2")
 	String getView2() {
-		
+        
+    	
 		return "view2";
 	}
 	
