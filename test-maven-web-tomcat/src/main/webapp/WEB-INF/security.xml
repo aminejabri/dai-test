@@ -6,14 +6,40 @@
 						
 	<http auto-config="true">
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 		<csrf disabled="true" />
 	</http>
-	
+
+	<b:bean id="userService" class="com.egym.serivce.UserService"/>
+  	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <b:bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <b:property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <b:property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ut1" />
+        <b:property name="user" value="root" />
+        <b:property name="password" value="aminebirk" />
+        <!-- these are connection pool properties for C3P0 -->
+        <b:property name="minPoolSize" value="5" />
+        <b:property name="maxPoolSize" value="20" />
+        <b:property name="maxIdleTime" value="30000" />
+    </b:bean>
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="admin" password="nimda" authorities="ROLE_ADMIN" />
-			</user-service>
+        <jdbc-user-service data-source-ref="myDataSource"
+ 
+					       users-by-username-query="
+					         SELECT USERNAME, PASSWORD, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' 
+					         FROM users 
+					         WHERE USERNAME=?;"
+					 
+					       authorities-by-username-query="
+					        SELECT u.USERNAME, r.ROLE 
+					        FROM users u, roles r
+					        WHERE r.id_user = u.id_user
+					        AND u.USERNAME=?;"
+					 
+					        />
+        	<password-encoder ref="encoder"/>
 		</authentication-provider>
 	</authentication-manager>
 

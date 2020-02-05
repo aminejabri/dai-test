@@ -1,11 +1,8 @@
-<%@ include file="/WEB-INF/jsp/include.jsp" %>
-<html>
-<body>
-<body>
-  <div class="container">
-    <h1>This is secured!</h1>
-    <p>
-      Hello <b><c:out value="${pageContext.request.remoteUser}"/></b>
-    </p>
-  </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <header th:replace="fragments/header::header"></header>
+
+    <div>
+        <h1>Home page</h1>
+    </div>
 </html>
