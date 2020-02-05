@@ -1,1 +1,8 @@
 nb-configuration.xml
+.classpath
+target/.
+
+.project
+.settings/
+.settings/.
+nb-configuration.xml

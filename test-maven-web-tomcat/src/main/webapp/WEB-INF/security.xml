@@ -5,24 +5,18 @@
 						http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd">
 						
 	<http auto-config="true">
+
+		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<intercept-url pattern="index.jsp"      access="permitAll" />
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_SECRET')"/>
+		
 		<csrf disabled="true" />
 	</http>
 
-	<b:bean id="userService" class="com.egym.serivce.UserService"/>
+    <b:import resource="daoContext.xml" />
+
   	<b:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <b:bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <b:property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <b:property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ut1" />
-        <b:property name="user" value="root" />
-        <b:property name="password" value="aminebirk" />
-        <!-- these are connection pool properties for C3P0 -->
-        <b:property name="minPoolSize" value="5" />
-        <b:property name="maxPoolSize" value="20" />
-        <b:property name="maxIdleTime" value="30000" />
-    </b:bean>
 	<authentication-manager>
 		<authentication-provider>
         <jdbc-user-service data-source-ref="myDataSource"

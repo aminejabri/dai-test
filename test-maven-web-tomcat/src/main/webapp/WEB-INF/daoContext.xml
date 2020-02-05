@@ -15,7 +15,20 @@
 							  http://www.springframework.org/schema/tx 
 							  http://www.springframework.org/schema/tx/spring-tx.xsd">
 							
-							
+	<!--bean id="myEmf"
+	  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>
+	    <property name="packagesToScan" value="org.baeldung.persistence.model"/>
+	    <property name="jpaVendorAdapter">
+	        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	    </property>
+	    <property name="jpaProperties">
+	       <props>
+	           <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+	          <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+	       </props>
+	    </property>
+	</bean-->
 	
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
@@ -29,7 +42,23 @@
         <property name="maxIdleTime" value="30000" />
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <bean id="entityManager" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="myDataSource" />
+        <property name="packagesToScan" value="com.egym" />
+		
+		<property name="jpaVendorAdapter">
+		    <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+		</property>
+		
+		<property name="jpaProperties">
+		   <props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+		   </props>
+		</property>
+		
+    </bean>    
+    <!--bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="myDataSource" />
         <property name="packagesToScan" value="com.egym" />
         <property name="hibernateProperties">
@@ -38,13 +67,13 @@
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
-    </bean>    
+    </bean-->    
 
 
 	 
 	    
-    <bean id="myTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-    	 <property name="sessionFactory" ref="sessionFactory"/>
+    <bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    	 <property name="entityManagerFactory" ref="entityManager"/>
     </bean>
     
    

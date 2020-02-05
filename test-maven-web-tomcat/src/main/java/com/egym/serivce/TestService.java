@@ -1,7 +1,8 @@
 package com.egym.serivce;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,15 +11,14 @@ import com.egym.entity.Customer;
 
 @Repository
 public class TestService {
+	
 
-	@Autowired
-	SessionFactory sessionFactory;
+	@PersistenceContext
+	EntityManager entityManagerFactory;
 	
 	@Transactional
 	public void save(Customer customer) {
 		
-    	Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(customer);
-
+		entityManagerFactory.persist(customer);
 	}
 }

@@ -1,5 +1,5 @@
 package com.egym.entity;
-import com.egym.repository.enums.RoleEnum;
+import com.egym.entity.enums.RoleEnum;
 import com.egym.utils.BCryptManagerUtil;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
