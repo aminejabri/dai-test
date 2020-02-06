@@ -7,3 +7,4 @@ target/.
 .settings/.
 nb-configuration.xml
 target/.
+test
