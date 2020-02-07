@@ -12,6 +12,7 @@
 		<hibernate.version>5.2.11.Final</hibernate.version>
         <hibernate.validator>5.4.1.Final</hibernate.validator>
         <c3p0.version>0.9.5.2</c3p0.version>
+		<apache.tiles>3.0.3</apache.tiles>
 		
 	</properties> 
   
@@ -108,6 +109,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
+
+		
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
    		 	<version>1.18.10</version>
@@ -120,6 +128,37 @@
 		    <version>2.2.4.RELEASE</version>
 		</dependency>
 		
+		
+			<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${apache.tiles}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${apache.tiles}</version>
+		</dependency>
+	
+		<!-- Commons -IO and FileUploads dependency for File Upload  -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.10.1</version>
+		</dependency>
 
 
   </dependencies>

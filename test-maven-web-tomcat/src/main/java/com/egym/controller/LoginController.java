@@ -20,4 +20,22 @@ public class LoginController {
         }
         return new ModelAndView("login");
     }
+    
+	@RequestMapping("/login")
+	public String login(){
+		return "login";
+	}
+	
+
+    
+	@RequestMapping("/error404")
+	public String show404(){
+		return "error404";
+	}
+	
+	@RequestMapping("/error500")
+	public String show500(){
+		return "error500";
+	}
+
 }
