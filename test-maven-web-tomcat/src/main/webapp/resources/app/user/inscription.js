@@ -12,7 +12,11 @@
   	user["email"]='Joh';
   	user["password"]='John';
   	
-  	
+	$( "#target" ).keyup(function() {
+  	alert( "Handler for .keyup() called." );
+	});
+
+		
 	$.ajax({
 		  method: "POST",		  
             contentType : "application/json",
