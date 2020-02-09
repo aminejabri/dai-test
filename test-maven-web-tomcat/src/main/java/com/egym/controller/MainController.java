@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.egym.entity.User;
 import com.egym.entity.enums.RoleEnum;
-import com.egym.repository.UserRepositoryInterface;
 import com.egym.utils.UserContext;
 
 @Controller
@@ -32,15 +31,12 @@ public class MainController {
 		return "upload";
 	}
 
-	@Autowired
-	private UserRepositoryInterface userRepository;
 
 	@GetMapping(value = "/view")
 	String getView() {
 
-		User user = new User("amine8", "amine", "amine", "jabri", Arrays.asList(RoleEnum.values()));
-		userRepository.save(user);
-
+		User user = new User("amine8", "amine", "amine@egym.com","amine", "jabri", Arrays.asList(RoleEnum.values()));
+  
 		return "view";
 	}
 

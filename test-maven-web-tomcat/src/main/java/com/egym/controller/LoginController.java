@@ -1,9 +1,19 @@
 package com.egym.controller;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.egym.entity.User;
+import com.egym.entity.enums.RoleEnum;
+import com.egym.repositories.UserRepository;
+
 @Controller
 public class LoginController {
+	
+	@Autowired
+	UserRepository userRepo;
 	
 	@RequestMapping("/")
 	public String home(){
@@ -12,6 +22,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login(){
+		
 		return "login";
 	}
 	

@@ -16,7 +16,6 @@ public class UserController {
 	@RequestMapping(value=("/inscription"), method = RequestMethod.GET)
 	public 	ModelAndView getPage(){
 		
-		int x = 1;
 		return new ModelAndView("inscription");
 	}
 	

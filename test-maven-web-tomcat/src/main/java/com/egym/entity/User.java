@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users")
+@Table(name = "UTILISATEUR")
 public class User implements UserDetails {
 
     /**
@@ -38,46 +38,50 @@ public class User implements UserDetails {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "UTIL_ID")
     private Integer idUser;
 
     @NotNull
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "UTIL_USERNAME", nullable = false, unique = true)
     private String username;
 
     @NotNull
-    @Column(name = "password", nullable = false)
+    @Column(name = "UTIL_PASSWORD", nullable = false)
     private String password;
 
     @NotNull
-    @Column(name = "firstname", nullable = false)
+    @Column(name = "UTIL_PRENOM", nullable = false)
     private String firstname;
 
     @NotNull
-    @Column(name = "lastname", nullable = false)
+    @Column(name = "UTIL_EMAIL", nullable = false)
+    private String email;
+
+    @NotNull
+    @Column(name = "UTIL_NOM", nullable = false)
     private String lastname;
 
     @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
     @Cascade(value = CascadeType.REMOVE)
     @JoinTable(
-            indexes = {@Index(name = "INDEX_USER_ROLE", columnList = "id_user")},
-            name = "roles",
-            joinColumns = @JoinColumn(name = "id_user")
+            indexes = {@Index(name = "INDEX_USER_ROLE", columnList = "ROL_UTIL_ID")},
+            name = "ROLES",
+            joinColumns = @JoinColumn(name = "ROL_UTIL_ID")
     )
-    @Column(name = "role", nullable = false)
+    @Column(name = "ROL_NAME", nullable = false)
     @Enumerated(EnumType.STRING)
     private List<RoleEnum> roles;
 
-    @Column(name = "account_non_expired")
+    @Column(name = "UTIL_ACCOUNT_NON_EXPIRED")
     private boolean accountNonExpired;
 
-    @Column(name = "account_non_locked")
+    @Column(name = "UTIL_ACCOUNT_NON_LOCKED")
     private boolean accountNonLocked;
 
-    @Column(name = "credentials_non_expired")
+    @Column(name = "UTIL_CREDENTIALS_NON_EXPIRED")
     private boolean credentialsNonExpired;
 
-    @Column(name = "enabled")
+    @Column(name = "UTIL_ENABLED")
     private boolean enabled;
 
     public User() {
@@ -88,10 +92,11 @@ public class User implements UserDetails {
         this.roles = Collections.singletonList(RoleEnum.ROLE_USER);
     }
 
-    public User(String username, String password, String firstname, String lastname, List<RoleEnum> roles) {
+    public User(String username, String password, String email, String firstname, String lastname, List<RoleEnum> roles) {
         this.username = username;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.firstname = firstname;
+        this.email = email;
         this.lastname = lastname;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
