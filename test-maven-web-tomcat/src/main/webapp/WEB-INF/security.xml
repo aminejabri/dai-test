@@ -25,15 +25,15 @@
         <jdbc-user-service data-source-ref="myDataSource"
  
 					       users-by-username-query="
-					         SELECT USERNAME, PASSWORD, CASE ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' 
-					         FROM users 
-					         WHERE USERNAME=?;"
+					         SELECT UTIL_USERNAME, UTIL_PASSWORD, CASE UTIL_ENABLED WHEN 1 THEN 'true' ELSE 'false' END 'ENABLED' 
+					         FROM UTILISATEUR 
+					         WHERE UTIL_USERNAME=?;"
 					 
 					       authorities-by-username-query="
-					        SELECT u.USERNAME, r.ROLE 
-					        FROM users u, roles r
-					        WHERE r.id_user = u.id_user
-					        AND u.USERNAME=?;"
+					        SELECT u.UTIL_USERNAME, r.ROL_NAME
+					        FROM UTILISATEUR u, ROLES r
+					        WHERE r.ROL_UTIL_ID = u.UTIL_ID
+					        AND u.UTIL_USERNAME=?;"
 					 
 					        />
         	<password-encoder ref="encoder"/>
