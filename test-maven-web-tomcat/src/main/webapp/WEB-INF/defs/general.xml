@@ -66,10 +66,17 @@
 	</definition>
 
 	<definition name="upload" extends="common">
-		<put-attribute name="title" value="Tracker Tool" />
+		<put-attribute name="title" value="profil" />
 		<put-attribute name="body" value="/WEB-INF/jsp/upload.jsp" />
 		<put-attribute name="upload" value="upload" />
 	</definition>
+	
+	<definition name="profil" extends="common">
+		<put-attribute name="title" value="Tracker Tool" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user/profil.jsp" />
+		<put-attribute name="profil" value="profil" />
+	</definition>
+	
 	<definition name="test" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
 		<put-attribute name="body" value="/WEB-INF/jsp/test.jsp" />

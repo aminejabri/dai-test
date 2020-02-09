@@ -32,5 +32,15 @@ public class UserRepository {
 		entityManager.persist(user);
 	}
 
+	public User getUserByUsername(String username) {
+
+		Query q = entityManager.createQuery("select u from User u where u.username = :username ");
+		q.setParameter("username", username);
+		
+		return  (User) q.getSingleResult();
+	}
+	
+	
+
 
 }

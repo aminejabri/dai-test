@@ -23,6 +23,6 @@ public class UserContext {
 			return (UserDetails)auth.getPrincipal();
 		}
 		return null;
-
 	}
+	
 }
