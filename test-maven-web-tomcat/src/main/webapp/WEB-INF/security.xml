@@ -8,6 +8,7 @@
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/user/inscription" access="permitAll"/>
 		<intercept-url pattern="resources/**" access="permitAll"/>
+		<intercept-url pattern="/test/**" access="permitAll"/>
 		<intercept-url pattern="/resources/**" access="permitAll"/>
 		<intercept-url pattern="/login"      access="permitAll" />
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />

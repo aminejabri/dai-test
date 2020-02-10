@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -84,7 +85,11 @@ public class User implements UserDetails {
     @Column(name = "UTIL_ENABLED")
     private boolean enabled;
 
-    public User() {
+    @OneToOne(mappedBy = "client", fetch = FetchType.LAZY)
+    Profil profil;
+
+    
+	public User() {
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
@@ -193,6 +198,22 @@ public class User implements UserDetails {
 	public String getPassword() {
 		return password;
 	}
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Profil getProfil() {
+		return profil;
+	}
+
+	public void setProfil(Profil profil) {
+		this.profil = profil;
+	}
+
 
 
 }

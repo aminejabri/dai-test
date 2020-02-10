@@ -79,7 +79,7 @@
 	
 	<definition name="test" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
-		<put-attribute name="body" value="/WEB-INF/jsp/test.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/test/test.jsp" />
 		<put-attribute name="test" value="test" />
 	</definition>
 	

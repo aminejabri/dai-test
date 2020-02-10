@@ -39,8 +39,4 @@ public class UserRepository {
 		
 		return  (User) q.getSingleResult();
 	}
-	
-	
-
-
 }
