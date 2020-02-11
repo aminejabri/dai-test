@@ -39,6 +39,9 @@ public class SeanceClient {
     @Column(name = "UTS_ORDRE",nullable = false)
     Integer ordreSeance;
 
+    @Column(name = "UTS_STATUT",nullable = false)
+    String status;
+
     @Column(name = "UTS_EVALUATION",nullable = false)
     Integer evaluation;
 
@@ -48,6 +51,14 @@ public class SeanceClient {
 
 	public void setSeance(Seance seance) {
 		this.seance = seance;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Programme getProgramme() {

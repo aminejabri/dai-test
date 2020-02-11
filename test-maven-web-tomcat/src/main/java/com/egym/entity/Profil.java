@@ -30,8 +30,12 @@ public class Profil {
 
     @Column(name = "PRO_MES_CUISSEG")
 	Double cuisse;
+    
+    // c'est quoi ?????
+    @Column(name = "PRO_OBJ")
+	String obj;
 
-    @Column(name = "PRO_MES_BRASG")
+	@Column(name = "PRO_MES_BRASG")
 	Double bras;
 
     @OneToOne(fetch = FetchType.LAZY,targetEntity = User.class)
@@ -87,6 +91,19 @@ public class Profil {
 		this.bras = bras;
 	}
     
-    
+    public String getObj() {
+		return obj;
+	}
 
+	public void setObj(String obj) {
+		this.obj = obj;
+	}
+
+	public User getClient() {
+		return client;
+	}
+
+	public void setClient(User client) {
+		this.client = client;
+	}
 }

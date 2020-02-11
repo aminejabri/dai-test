@@ -17,7 +17,7 @@ public class ProgrammeClient {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AUP_ID")
-    private Integer idUser;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity= User.class)
     @JoinColumn(name="AUP_UTIL_ID")
@@ -27,6 +27,15 @@ public class ProgrammeClient {
     @JoinColumn(name="AUP_PROG_ID")
 	Programme programme;
     
+    
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public User getUser() {
 		return user;
 	}
