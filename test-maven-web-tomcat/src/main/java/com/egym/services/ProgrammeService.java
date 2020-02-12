@@ -67,6 +67,10 @@ public class ProgrammeService {
 	 */
 	private void createPeriodesProgramme(List<PeriodeProgramme> periodesProgramme, User client) {
 
+		for (PeriodeProgramme periodeProgramme : periodesProgramme) {
+
+			// ccreation dune table programme service
+		}
 	}
 
 	private void createPeriodes() {

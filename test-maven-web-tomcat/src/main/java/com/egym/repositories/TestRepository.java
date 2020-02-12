@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.egym.entity.Exercice;
 import com.egym.entity.ExerciceClient;
 import com.egym.entity.Notification;
-import com.egym.entity.Periode;
-import com.egym.entity.PeriodeProgramme;
 import com.egym.entity.Profil;
 import com.egym.entity.Programme;
 import com.egym.entity.Seance;
@@ -141,39 +139,39 @@ public class TestRepository {
 	}
 
 	private void createPeriodes() {
-		Periode periode = new Periode();
-
-		Periode periode2 = new Periode();
-
-		entityManager.persist(programme);
-		entityManager.persist(programme1);
-
-		PeriodeProgramme pp = new PeriodeProgramme();
-		pp.setPeriode(periode);
-		pp.setProgramme(programme);
-		pp.setOrdrePeriode(1);
-		pp.setUser(users.get(1));
-
-		entityManager.persist(periode);
-		entityManager.persist(pp);
-
-		PeriodeProgramme pp2 = new PeriodeProgramme();
-		pp2.setPeriode(periode);
-		pp2.setProgramme(programme1);
-		pp2.setOrdrePeriode(1);
-		pp2.setUser(users.get(2));
-
-		entityManager.persist(periode);
-		entityManager.persist(pp2);
-
-		PeriodeProgramme pp3 = new PeriodeProgramme();
-		pp3.setPeriode(periode2);
-		pp3.setProgramme(programme1);
-		pp3.setOrdrePeriode(2);
-		pp3.setUser(users.get(2));
-
-		entityManager.persist(periode2);
-		entityManager.persist(pp3);
+		// Periode periode = new Periode();
+		//
+		// Periode periode2 = new Periode();
+		//
+		// entityManager.persist(programme);
+		// entityManager.persist(programme1);
+		//
+		// PeriodeProgramme pp = new PeriodeProgramme();
+		// pp.setPeriode(periode);
+		// pp.setProgramme(programme);
+		// pp.setOrdrePeriode(1);
+		// pp.setUser(users.get(1));
+		//
+		// entityManager.persist(periode);
+		// entityManager.persist(pp);
+		//
+		// PeriodeProgramme pp2 = new PeriodeProgramme();
+		// pp2.setPeriode(periode);
+		// pp2.setProgramme(programme1);
+		// pp2.setOrdrePeriode(1);
+		// pp2.setUser(users.get(2));
+		//
+		// entityManager.persist(periode);
+		// entityManager.persist(pp2);
+		//
+		// PeriodeProgramme pp3 = new PeriodeProgramme();
+		// pp3.setPeriode(periode2);
+		// pp3.setProgramme(programme1);
+		// pp3.setOrdrePeriode(2);
+		// pp3.setUser(users.get(2));
+		//
+		// entityManager.persist(periode2);
+		// entityManager.persist(pp3);
 
 	}
 
@@ -271,14 +269,14 @@ public class TestRepository {
 
 		SeancePeriode spe = new SeancePeriode();
 		spe.setOrdreSeance(1);
-		spe.setPeriode(periode);
+		// spe.setPeriode(periode);
 		spe.setSeance(seance);
 
 		entityManager.persist(spe);
 
 		SeancePeriode spe2 = new SeancePeriode();
 		spe2.setOrdreSeance(2);
-		spe2.setPeriode(periode2);
+		// spe2.setPeriode(periode2);
 		spe2.setSeance(seance2);
 
 		entityManager.persist(spe2);
