@@ -2,28 +2,46 @@ package com.egym.controller;
 
 import java.util.Arrays;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.egym.entity.Bilan;
+import com.egym.entity.Exercice;
+import com.egym.entity.ExerciceClient;
+import com.egym.entity.Notification;
+import com.egym.entity.Periode;
+import com.egym.entity.PeriodeProgramme;
+import com.egym.entity.Profil;
 import com.egym.entity.Programme;
 import com.egym.entity.ProgrammeClient;
 import com.egym.entity.Seance;
 import com.egym.entity.SeanceClient;
+import com.egym.entity.SeanceExercice;
+import com.egym.entity.SeancePeriode;
 import com.egym.entity.SeanceProgramme;
 import com.egym.entity.User;
 import com.egym.entity.enums.RoleEnum;
 import com.egym.entity.enums.TypeSeance;
 import com.egym.repositories.ProgrammeRepository;
 import com.egym.repositories.SeanceRepository;
+import com.egym.repositories.TestRepository;
 import com.egym.repositories.UserRepository;
 
 @Controller
 @RequestMapping(value="/test")
 public class TestController {
 	
+	@PersistenceContext
+	EntityManager entityManager;
+	
+
 	@Autowired
 	ProgrammeRepository progRepo;
 
@@ -33,12 +51,39 @@ public class TestController {
 	@Autowired
 	SeanceRepository seanceRepo;
 	
+	@Autowired
+	TestRepository testRepo;
+	
+	
+	@GetMapping(value="/populateDataBase")
+	public String populateDataBase() {
+		
+		createInstances();
+		return "done";
+	}
+	
+	private void createInstances() {
+		testRepo.createUser();
+		User u1 = userRepo.getUserByUsername("user");
+		User u2 = userRepo.getUserByUsername("admin");
+		testRepo.createInstance(u1, u2);
+	}
+
 	@GetMapping(value="/ajouterProgramme")
 	ModelAndView ajouterProgramme() {
 		
 		User u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
 		
-		//userRepo.persist(u1);
+		Profil profil = new Profil();
+		profil.setPoitrine(10.);
+		profil.setTaille(10.);
+		profil.setHanche(10.);
+		profil.setCuisse(10.);
+		profil.setBras(10.);
+		profil.setObj("cest quoi");
+		profil.setClient(u1);
+
+		entityManager.persist(profil);
 		
 		Programme programme = new Programme("p2", 1);
 		
@@ -48,6 +93,85 @@ public class TestController {
 		pg.setUser(u1);
 		
 		progRepo.persist(programme, pg);
+		
+		SeanceProgramme sp  = new SeanceProgramme();
+		Seance seance  = new Seance();
+		
+		sp.setProgramme(programme);
+		sp.setSeance(seance);
+		sp.setOrdreSeance(1);
+		
+		progRepo.persist(programme);
+		seanceRepo.persist(seance, sp);
+		
+		seance.setType(TypeSeance.BILAN);
+		
+		SeanceClient sc = new SeanceClient();
+
+		sc.setProgramme(programme);
+		sc.setSeance(seance);
+		sc.setOrdreSeance(1);
+		sc.setClient(u1);
+		
+		progRepo.persist(programme);
+		seanceRepo.persist(seance, sc);
+		
+		
+		Bilan bilan = new Bilan();
+		bilan.setFreqCardiaqueRepos(10.);
+		bilan.setFreqCardiaqueCible(10.);
+		bilan.setFreqCardiaqueMax(10.);
+		bilan.setPoid(10.);
+		bilan.setIndiceDickson(10.);
+		bilan.setFreqCardiaque5minAllonge(10.);
+		bilan.setFreqCardiaque30Flex(10.);
+		bilan.setFreqCardiaque1min(10.);
+		bilan.setSeanceClient(sc);
+
+		entityManager.persist(bilan);
+		
+		Periode periode = new Periode();
+		
+		entityManager.persist(programme);
+		
+		PeriodeProgramme pp = new PeriodeProgramme();
+		pp.setPeriode(periode);
+		pp.setProgramme(programme);
+		pp.setOrdrePeriode(1);
+		pp.setUser(u1);
+		
+		entityManager.persist(pp);
+		
+		SeancePeriode spe = new SeancePeriode();
+		spe.setOrdreSeance(1);
+		spe.setPeriode(periode);
+		spe.setSeance(seance);
+		
+		entityManager.persist(spe);
+		
+		Exercice exercice = new Exercice();
+		exercice.setDescription("desc");
+		entityManager.persist(exercice);
+
+		ExerciceClient ec = new ExerciceClient();
+		ec.setClient(u1);
+		ec.setExercice(exercice);
+		ec.setOrdreSeance(1);
+		ec.setOrdreExercice(1);
+		ec.setSeance(seance);
+		
+		entityManager.persist(ec);
+		
+		SeanceExercice se = new SeanceExercice();
+
+		se.setExercice(exercice);
+		se.setSeance(seance);
+		se.setOrdreExercice(1);
+		se.setChrono(10);
+		entityManager.persist(se);
+
+		Notification notification = new Notification();
+		notification.setEmetteur(u1);
 		
 		return new ModelAndView("test");
 	}
