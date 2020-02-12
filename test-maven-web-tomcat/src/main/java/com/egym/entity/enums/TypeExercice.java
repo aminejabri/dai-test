@@ -1,0 +1,9 @@
+package com.egym.entity.enums;
+
+public enum TypeExercice {
+
+	PREDEFINI_CHRONOMETRE,
+	PREDEFINI_REPETITION,
+	PERFORMANCE_CHRONOMETRE,
+	PERFORMANCE_REPETITION
+}

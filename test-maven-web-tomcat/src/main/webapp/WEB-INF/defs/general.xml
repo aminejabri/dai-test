@@ -71,6 +71,12 @@
 		<put-attribute name="upload" value="upload" />
 	</definition>
 	
+	<definition name="bilan" extends="common">
+		<put-attribute name="title" value="bilan" />
+		<put-attribute name="body" value="/WEB-INF/jsp/bilan/bilan.jsp" />
+		<put-attribute name="bilan" value="bilan" />
+	</definition>
+	
 	<definition name="profil" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/profil.jsp" />

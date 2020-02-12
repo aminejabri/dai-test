@@ -2,6 +2,7 @@ package com.egym.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class MainController {
 	@GetMapping(value = "/view")
 	String getView() {
 
-		User user = new User("amine8", "amine", "amine@egym.com","amine", "jabri", Arrays.asList(RoleEnum.values()));
+		User user = new User("amine8", "amine", "amine@egym.com","amine", "jabri", new Date(634815155L) , Arrays.asList(RoleEnum.values()));
   
 		return "view";
 	}
