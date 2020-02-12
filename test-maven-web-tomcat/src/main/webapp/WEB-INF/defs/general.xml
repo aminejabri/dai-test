@@ -86,7 +86,13 @@
 	<definition name="test" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
 		<put-attribute name="body" value="/WEB-INF/jsp/test/test.jsp" />
-		<put-attribute name="test" value="test" />
+		<put-attribute name="current" value="test" />
+	</definition>
+	
+	<definition name="programme" extends="common">
+		<put-attribute name="title" value="Programme" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user/programme.jsp" />
+		<put-attribute name="current" value="programme" />
 	</definition>
 	
 	<definition name="home" extends="common">

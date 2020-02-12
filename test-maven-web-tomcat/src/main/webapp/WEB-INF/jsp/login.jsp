@@ -5,7 +5,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a><br>
+    <a href="../../index2.html"><b>E</b>gym</a><br>
    		<c:if test="${param.success eq true}">
    			<br>
 			<div class="alert alert-success alert-dismissible">
@@ -24,35 +24,35 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
 			
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Veuillez vous connecter</p>
 
     <form class="" role="form" action="/login" method="POST">
       <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" id="username" placeholder="User Id" required="" autofocus>
+        <input type="text" name="username" class="form-control" id="username" placeholder="Identifiant" required="" autofocus>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password"  name="password"  class="form-control" id="password" placeholder="Password" required="" />
+        <input type="password"  name="password"  class="form-control" id="password" placeholder="Mots de passe" required="" />
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox"> Se souvenir de moi
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
-    <a href="#">I forgot my password</a><br>
-    <a href="<spring:url value='/register' />" class="text-center"> Register a new membership </a>
+    <a href="#">J'ai oublié mon mots de passe</a><br>
+    <a href="http://localhost:8080/user/inscription"> S'inscrire </a>
 
   </div>
   <!-- /.login-box-body -->
