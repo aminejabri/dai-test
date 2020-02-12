@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.egym.entity.enums.TypeProgramme;
+
 @Entity
 @Table(name = "PROGRAMME")
 public class Programme implements Serializable {
@@ -31,7 +33,7 @@ public class Programme implements Serializable {
 	String nom;
 
 	@Column(name = "PROG_TYPE", nullable = false, unique = true)
-	Integer type;
+	TypeProgramme type;
 
 	@OneToMany(mappedBy = "programme", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<ProgrammeClient> programmesClients = new ArrayList<>();
@@ -52,11 +54,11 @@ public class Programme implements Serializable {
 		this.nom = nom;
 	}
 
-	public Integer getType() {
+	public TypeProgramme getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(TypeProgramme type) {
 		this.type = type;
 	}
 

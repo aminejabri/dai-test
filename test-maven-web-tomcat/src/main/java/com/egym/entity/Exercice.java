@@ -19,6 +19,9 @@ public class Exercice {
 	@Column(name = "EXE_IMG")
 	String imageUrl;
 
+	@Column(name = "EXE_NOM")
+	String nom;
+
 	@Column(name = "EXE_DESCRI")
 	String description;
 
@@ -45,6 +48,13 @@ public class Exercice {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 	
 }

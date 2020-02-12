@@ -6,7 +6,7 @@
 	id="WebApp_ID" version="4.0">
 
 	<display-name>dai-project</display-name>
-	<welcome-file-list>
+<!-- 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
@@ -14,7 +14,7 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
+ -->
 	<display-name>Archetype Created Web Application</display-name>
 
 	<servlet>

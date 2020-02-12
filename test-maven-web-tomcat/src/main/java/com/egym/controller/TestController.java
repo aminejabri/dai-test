@@ -1,6 +1,7 @@
 package com.egym.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,8 @@ import com.egym.entity.SeancePeriode;
 import com.egym.entity.SeanceProgramme;
 import com.egym.entity.User;
 import com.egym.entity.enums.RoleEnum;
+import com.egym.entity.enums.TypeExercice;
+import com.egym.entity.enums.TypeProgramme;
 import com.egym.entity.enums.TypeSeance;
 import com.egym.repositories.ProgrammeRepository;
 import com.egym.repositories.SeanceRepository;
@@ -60,16 +63,24 @@ public class TestController {
 	}
 
 	private void createInstances() {
-		testRepo.createUser();
-		User u1 = userRepo.getUserByUsername("user");
-		User u2 = userRepo.getUserByUsername("admin");
-		testRepo.createInstance(u1, u2);
+		testRepo.createUsers();
+		User u1 = userRepo.getUserByUsername("chleo");
+		User u2 = userRepo.getUserByUsername("georges");
+		User u3 = userRepo.getUserByUsername("jd");
+
+		testRepo.createInstance(Arrays.asList(u1, u2, u3));
 	}
 
 	@GetMapping(value = "/ajouterProgramme")
 	ModelAndView ajouterProgramme() {
 
-		User u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
+		User u1 = new User("chleo", "chleo", "chleo@chleo", "chleo", "chleo", new Date(634815155L),
+				Arrays.asList(RoleEnum.ROLE_USER));
+
+		User u2 = new User("georges", "georges", "georges@georges", "georges", "georges", new Date(697887155L),
+				Arrays.asList(RoleEnum.ROLE_USER));
+
+		User u3 = new User("jd", "jd", "jd@jd", "jd", "jd", new Date(697887155L), Arrays.asList(RoleEnum.ROLE_USER));
 
 		Profil profil = new Profil();
 		profil.setPoitrine(10.);
@@ -83,6 +94,8 @@ public class TestController {
 		entityManager.persist(profil);
 
 		Programme programme = new Programme();
+		programme.setNom("prog1");
+		programme.setType(TypeProgramme.NORMAL);
 
 		ProgrammeClient pg = new ProgrammeClient();
 
@@ -146,6 +159,7 @@ public class TestController {
 		entityManager.persist(spe);
 
 		Exercice exercice = new Exercice();
+		exercice.setNom("nom");
 		exercice.setDescription("desc");
 		entityManager.persist(exercice);
 
@@ -163,7 +177,7 @@ public class TestController {
 		se.setExercice(exercice);
 		se.setSeance(seance);
 		se.setOrdreExercice(1);
-		se.setChrono(10);
+		se.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
 		entityManager.persist(se);
 
 		Notification notification = new Notification();
@@ -176,7 +190,7 @@ public class TestController {
 	ModelAndView ajouterAdmin() {
 
 		if (!userRepo.usernameExists("admin")) {
-			User admin = new User("admin", "admin", "admin@admin", "admin", "usadminer",
+			User admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", new Date(634815155L),
 					Arrays.asList(RoleEnum.values()));
 			userRepo.persist(admin);
 		}
@@ -188,6 +202,8 @@ public class TestController {
 	ModelAndView ajouterSeanceProgramme() {
 
 		Programme programme = new Programme();
+		programme.setNom("prog1");
+		programme.setType(TypeProgramme.NORMAL);
 
 		SeanceProgramme sp = new SeanceProgramme();
 		Seance seance = new Seance();
@@ -208,13 +224,16 @@ public class TestController {
 
 		User u1;
 		if (!userRepo.usernameExists("user")) {
-			u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
+			u1 = new User("user", "user", "user@user", "user", "user", new Date(634815155L),
+					Arrays.asList(RoleEnum.ROLE_USER));
 			userRepo.persist(u1);
 		} else {
 			u1 = userRepo.getUserByUsername("user");
 		}
 
 		Programme programme = new Programme();
+		programme.setNom("prog1");
+		programme.setType(TypeProgramme.NORMAL);
 
 		SeanceClient sc = new SeanceClient();
 		Seance seance = new Seance();

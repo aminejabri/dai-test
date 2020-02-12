@@ -10,31 +10,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.egym.entity.enums.TypeExercice;
+
 @Entity
 @Table(name = "COMPOSER_SEA_EXE")
 public class SeanceExercice {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CSE_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CSE_ID")
 	Integer id;
-	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity= Seance.class)
-    @JoinColumn(name="CSE_SEA_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Seance.class)
+	@JoinColumn(name = "CSE_SEA_ID")
 	Seance seance;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity= Exercice.class)
-    @JoinColumn(name="CSE_EXE_ID")
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Exercice.class)
+	@JoinColumn(name = "CSE_EXE_ID")
 	Exercice exercice;
 
-	@Column(name = "CSE_ORDRE",nullable = false)
-    Integer ordreExercice;
+	@Column(name = "CSE_ORDRE_EXE", nullable = false)
+	Integer ordreExercice;
 
-	@Column(name = "CSE_CHRONO",nullable = false)
-    Integer chrono;
+	@Column(name = "CSE_ORDRE_SEANCE", nullable = false)
+	Integer ordreSeance;
 
-	@Column(name = "CSE_REPETITION",nullable = false)
-    Integer repetition;
+	@Column(name = "CSE_TYPE_EXER", nullable = false)
+	TypeExercice typeExercice;
+
+	@Column(name = "CSE_PERF_PRED", nullable = true)
+	Integer perfPredefini;
 
 	public Integer getId() {
 		return id;
@@ -68,20 +73,28 @@ public class SeanceExercice {
 		this.ordreExercice = ordreExercice;
 	}
 
-	public Integer getChrono() {
-		return chrono;
+	public TypeExercice getTypeExercice() {
+		return typeExercice;
 	}
 
-	public void setChrono(Integer chrono) {
-		this.chrono = chrono;
+	public void setTypeExercice(TypeExercice typeExercice) {
+		this.typeExercice = typeExercice;
 	}
 
-	public Integer getRepetition() {
-		return repetition;
+	public Integer getPerfPredefini() {
+		return perfPredefini;
 	}
 
-	public void setRepetition(Integer repetition) {
-		this.repetition = repetition;
+	public void setPerfPredefini(Integer perfPredefini) {
+		this.perfPredefini = perfPredefini;
+	}
+
+	public Integer getOrdreSeance() {
+		return ordreSeance;
+	}
+
+	public void setOrdreSeance(Integer ordreSeance) {
+		this.ordreSeance = ordreSeance;
 	}
 
 }

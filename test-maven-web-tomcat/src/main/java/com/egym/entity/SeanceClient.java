@@ -11,39 +11,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.egym.entity.enums.StatutSeance;
+
 @Entity
 @Table(name = "UTIL_SEANCE")
 public class SeanceClient {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UTS_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "UTS_ID")
 	Integer id;
-	
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity= Seance.class)
-    @JoinColumn(name="UTS_SEA_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Seance.class)
+	@JoinColumn(name = "UTS_SEA_ID")
 	Seance seance;
-	
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity= Programme.class)
-    @JoinColumn(name="UTS_PROG_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Programme.class)
+	@JoinColumn(name = "UTS_PROG_ID")
 	Programme programme;
-	
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity= User.class)
-    @JoinColumn(name="UTS_UTIL_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@JoinColumn(name = "UTS_UTIL_ID")
 	User client;
-	
-    @OneToOne(fetch = FetchType.LAZY,targetEntity = Bilan.class)
-    @JoinColumn(name = "UTS_BIL_ID")
+
+	@OneToOne(fetch = FetchType.LAZY, targetEntity = Bilan.class)
+	@JoinColumn(name = "UTS_BIL_ID")
 	Bilan bilan;
-	
-    @Column(name = "UTS_ORDRE",nullable = false)
-    Integer ordreSeance;
 
-    @Column(name = "UTS_STATUT",nullable = false)
-    String status;
+	@Column(name = "UTS_ORDRE", nullable = false)
+	Integer ordreSeance;
 
-    @Column(name = "UTS_EVALUATION",nullable = false)
-    Integer evaluation;
+	@Column(name = "UTS_STATUT", nullable = false)
+	StatutSeance status;
+
+	@Column(name = "UTS_EVALUATION", nullable = false)
+	Integer evaluation;
 
 	public Seance getSeance() {
 		return seance;
@@ -52,12 +54,12 @@ public class SeanceClient {
 	public void setSeance(Seance seance) {
 		this.seance = seance;
 	}
-	
-	public String getStatus() {
+
+	public StatutSeance getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatutSeance status) {
 		this.status = status;
 	}
 
@@ -77,7 +79,7 @@ public class SeanceClient {
 		this.client = client;
 	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -108,6 +110,5 @@ public class SeanceClient {
 	public void setEvaluation(Integer evaluation) {
 		this.evaluation = evaluation;
 	}
-
 
 }

@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.egym.entity.Bilan;
+import com.egym.entity.Exercice;
 import com.egym.entity.Seance;
 import com.egym.entity.SeanceClient;
+import com.egym.entity.SeanceExercice;
 import com.egym.entity.SeanceProgramme;
 import com.egym.entity.User;
 import com.egym.utils.UserContext;
@@ -69,6 +72,50 @@ public class SeanceRepository {
 
 		return (ArrayList<SeanceClient>) entityManager.createQuery(query.toString())
 				.setParameter("utilisateurCourant", utilisateurCourant).getResultList();
+	}
+
+	public List<Bilan> getBilansByUserId(Integer userId) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select b from Bilan b ");
+		query.append("inner join  SeanceClient s on b.id = s.bilan.id ");
+		query.append("inner join User u  on s.client.id = u.idUser ");
+		query.append("where u.idUser = :userId ");
+		return (ArrayList<Bilan>) entityManager.createQuery(query.toString()).setParameter("userId", userId)
+				.getResultList();
+
+	}
+
+	public List<Exercice> getExercicesByUserId(Integer userId) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select e from exercice e ");
+		query.append("inner join ");
+		// query.append();
+		// query.append();
+
+		return (ArrayList<Exercice>) entityManager.createQuery(query.toString()).getResultList();
+	}
+
+	public List<SeanceProgramme> getSeanceProgrammeByProgrammeId(Integer programmeId) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select sp from SeanceProgramme sp where sp.programme.id = :programmeId");
+
+		return (List<SeanceProgramme>) entityManager.createQuery(query.toString())
+				.setParameter("programmeId", programmeId).getResultList();
+	}
+
+	public List<SeanceExercice> getSeanceExercicesBySeanceIds(List<Integer> idSeances) {
+
+		if (idSeances == null || idSeances.isEmpty())
+			return new ArrayList<>();
+
+		StringBuilder query = new StringBuilder();
+		query.append("select se from SeanceExercice se where se.seance.id in (:idSeances)");
+
+		return (List<SeanceExercice>) entityManager.createQuery(query.toString()).setParameter("idSeances", idSeances)
+				.getResultList();
 	}
 
 }

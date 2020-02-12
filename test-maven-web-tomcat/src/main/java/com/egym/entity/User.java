@@ -25,6 +25,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,10 @@ public class User implements UserDetails {
     @NotNull
     @Column(name = "UTIL_PASSWORD", nullable = false)
     private String password;
+
+    @NotNull
+    @Column(name = "UTIL_DATE_NAISSANCE", nullable = false)
+    private Date dateNaissance;
 
     @NotNull
     @Column(name = "UTIL_PRENOM", nullable = false)
@@ -97,11 +102,12 @@ public class User implements UserDetails {
         this.roles = Collections.singletonList(RoleEnum.ROLE_USER);
     }
 
-    public User(String username, String password, String email, String firstname, String lastname, List<RoleEnum> roles) {
+    public User(String username, String password, String email, String firstname, String lastname, Date datenaissance, List<RoleEnum> roles) {
         this.username = username;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.firstname = firstname;
         this.email = email;
+        this.dateNaissance = datenaissance;
         this.lastname = lastname;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
