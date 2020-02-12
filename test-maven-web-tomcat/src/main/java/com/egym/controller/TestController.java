@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,33 +34,31 @@ import com.egym.repositories.TestRepository;
 import com.egym.repositories.UserRepository;
 
 @Controller
-@RequestMapping(value="/test")
+@RequestMapping(value = "/test")
 public class TestController {
-	
+
 	@PersistenceContext
 	EntityManager entityManager;
-	
 
 	@Autowired
 	ProgrammeRepository progRepo;
 
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	SeanceRepository seanceRepo;
-	
+
 	@Autowired
 	TestRepository testRepo;
-	
-	
-	@GetMapping(value="/populateDataBase")
+
+	@GetMapping(value = "/populateDataBase")
 	public String populateDataBase() {
-		
+
 		createInstances();
 		return "done";
 	}
-	
+
 	private void createInstances() {
 		testRepo.createUser();
 		User u1 = userRepo.getUserByUsername("user");
@@ -69,11 +66,11 @@ public class TestController {
 		testRepo.createInstance(u1, u2);
 	}
 
-	@GetMapping(value="/ajouterProgramme")
+	@GetMapping(value = "/ajouterProgramme")
 	ModelAndView ajouterProgramme() {
-		
+
 		User u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
-		
+
 		Profil profil = new Profil();
 		profil.setPoitrine(10.);
 		profil.setTaille(10.);
@@ -84,39 +81,38 @@ public class TestController {
 		profil.setClient(u1);
 
 		entityManager.persist(profil);
-		
-		Programme programme = new Programme("p2", 1);
-		
-		ProgrammeClient pg  = new ProgrammeClient();
-		
+
+		Programme programme = new Programme();
+
+		ProgrammeClient pg = new ProgrammeClient();
+
 		pg.setProgramme(programme);
 		pg.setUser(u1);
-		
+
 		progRepo.persist(programme, pg);
-		
-		SeanceProgramme sp  = new SeanceProgramme();
-		Seance seance  = new Seance();
-		
+
+		SeanceProgramme sp = new SeanceProgramme();
+		Seance seance = new Seance();
+
 		sp.setProgramme(programme);
 		sp.setSeance(seance);
 		sp.setOrdreSeance(1);
-		
+
 		progRepo.persist(programme);
 		seanceRepo.persist(seance, sp);
-		
+
 		seance.setType(TypeSeance.BILAN);
-		
+
 		SeanceClient sc = new SeanceClient();
 
 		sc.setProgramme(programme);
 		sc.setSeance(seance);
 		sc.setOrdreSeance(1);
 		sc.setClient(u1);
-		
+
 		progRepo.persist(programme);
 		seanceRepo.persist(seance, sc);
-		
-		
+
 		Bilan bilan = new Bilan();
 		bilan.setFreqCardiaqueRepos(10.);
 		bilan.setFreqCardiaqueCible(10.);
@@ -129,26 +125,26 @@ public class TestController {
 		bilan.setSeanceClient(sc);
 
 		entityManager.persist(bilan);
-		
+
 		Periode periode = new Periode();
-		
+
 		entityManager.persist(programme);
-		
+
 		PeriodeProgramme pp = new PeriodeProgramme();
 		pp.setPeriode(periode);
 		pp.setProgramme(programme);
 		pp.setOrdrePeriode(1);
 		pp.setUser(u1);
-		
+
 		entityManager.persist(pp);
-		
+
 		SeancePeriode spe = new SeancePeriode();
 		spe.setOrdreSeance(1);
 		spe.setPeriode(periode);
 		spe.setSeance(seance);
-		
+
 		entityManager.persist(spe);
-		
+
 		Exercice exercice = new Exercice();
 		exercice.setDescription("desc");
 		entityManager.persist(exercice);
@@ -159,9 +155,9 @@ public class TestController {
 		ec.setOrdreSeance(1);
 		ec.setOrdreExercice(1);
 		ec.setSeance(seance);
-		
+
 		entityManager.persist(ec);
-		
+
 		SeanceExercice se = new SeanceExercice();
 
 		se.setExercice(exercice);
@@ -172,68 +168,67 @@ public class TestController {
 
 		Notification notification = new Notification();
 		notification.setEmetteur(u1);
-		
+
 		return new ModelAndView("test");
 	}
-	
-	@GetMapping(value="/ajouterAdmin")
+
+	@GetMapping(value = "/ajouterAdmin")
 	ModelAndView ajouterAdmin() {
-		
-		
-		if(!userRepo.usernameExists("admin")) {
-			User admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", Arrays.asList(RoleEnum.values()));
+
+		if (!userRepo.usernameExists("admin")) {
+			User admin = new User("admin", "admin", "admin@admin", "admin", "usadminer",
+					Arrays.asList(RoleEnum.values()));
 			userRepo.persist(admin);
 		}
-		
+
 		return new ModelAndView("test");
 	}
-	
-	
-	@GetMapping(value="/ajouterSeanceProgramme")
+
+	@GetMapping(value = "/ajouterSeanceProgramme")
 	ModelAndView ajouterSeanceProgramme() {
 
-		Programme programme = new Programme("progra seance", 1);
-		
-		SeanceProgramme sp  = new SeanceProgramme();
-		Seance seance  = new Seance();
-		
+		Programme programme = new Programme();
+
+		SeanceProgramme sp = new SeanceProgramme();
+		Seance seance = new Seance();
+
 		sp.setProgramme(programme);
 		sp.setSeance(seance);
 		sp.setOrdreSeance(1);
-		
+
 		progRepo.persist(programme);
 		seanceRepo.persist(seance, sp);
-		
+
 		return new ModelAndView("test");
 	}
-	
-	@GetMapping(value="/ajouterSeanceClient")
+
+	@GetMapping(value = "/ajouterSeanceClient")
 	ModelAndView ajouterSeanceClient() {
 		seanceRepo.getSeanceById(1);
 
 		User u1;
-		if(!userRepo.usernameExists("user")) {
+		if (!userRepo.usernameExists("user")) {
 			u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
 			userRepo.persist(u1);
 		} else {
 			u1 = userRepo.getUserByUsername("user");
 		}
-		
-		Programme programme = new Programme("progra seance", 1);
-		
+
+		Programme programme = new Programme();
+
 		SeanceClient sc = new SeanceClient();
-		Seance seance  = new Seance();
-		
+		Seance seance = new Seance();
+
 		seance.setType(TypeSeance.BILAN);
-		
+
 		sc.setProgramme(programme);
 		sc.setSeance(seance);
 		sc.setOrdreSeance(1);
 		sc.setClient(u1);
-		
+
 		progRepo.persist(programme);
 		seanceRepo.persist(seance, sc);
-		
+
 		return new ModelAndView("test");
 	}
 }

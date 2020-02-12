@@ -1,6 +1,5 @@
 package com.egym.repositories;
 
-
 import java.util.Arrays;
 
 import javax.persistence.EntityManager;
@@ -34,31 +33,28 @@ public class TestRepository {
 
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Transactional
 	public void createUser() {
-		
+
 		User admin;
-		if(!userRepo.usernameExists("admin")) {
+		if (!userRepo.usernameExists("admin")) {
 			admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", Arrays.asList(RoleEnum.values()));
 			entityManager.persist(admin);
 		}
-		
+
 		User u1;
-		if(!userRepo.usernameExists("user")) {
+		if (!userRepo.usernameExists("user")) {
 			u1 = new User("user", "user", "user@user", "user", "user", Arrays.asList(RoleEnum.ROLE_USER));
 			entityManager.persist(u1);
 		}
 	}
-	
 
-	
-	@Transactional(rollbackFor= Exception.class)
-	public void createInstance(User u1,User u2) {
-		
+	@Transactional(rollbackFor = Exception.class)
+	public void createInstance(User u1, User u2) {
 
 		Profil profil = new Profil();
 		profil.setPoitrine(10.);
@@ -71,45 +67,43 @@ public class TestRepository {
 
 		entityManager.persist(profil);
 
-		Programme programme = new Programme("p2", 1);
-		
+		Programme programme = new Programme();
+
 		entityManager.persist(programme);
 
-		ProgrammeClient pg  = new ProgrammeClient();
-		
+		ProgrammeClient pg = new ProgrammeClient();
+
 		pg.setProgramme(programme);
 		pg.setUser(u1);
-		
-		
+
 		pg.setProgramme(programme);
 		pg.setUser(u1);
-		
+
 		entityManager.persist(pg);
-		
-		SeanceProgramme sp  = new SeanceProgramme();
-		Seance seance  = new Seance();
-		
+
+		SeanceProgramme sp = new SeanceProgramme();
+		Seance seance = new Seance();
+
 		sp.setProgramme(programme);
 		sp.setSeance(seance);
 		sp.setOrdreSeance(1);
-		
+
 		entityManager.persist(programme);
 		entityManager.persist(seance);
-		entityManager.persist( sp);
-		
+		entityManager.persist(sp);
+
 		seance.setType(TypeSeance.BILAN);
-		
+
 		SeanceClient sc = new SeanceClient();
 
 		sc.setProgramme(programme);
 		sc.setSeance(seance);
 		sc.setOrdreSeance(1);
 		sc.setClient(u1);
-		
+
 		entityManager.persist(programme);
-		entityManager.persist( sc);
-		
-		
+		entityManager.persist(sc);
+
 		Bilan bilan = new Bilan();
 		bilan.setFreqCardiaqueRepos(10.);
 		bilan.setFreqCardiaqueCible(10.);
@@ -122,27 +116,27 @@ public class TestRepository {
 		bilan.setSeanceClient(sc);
 
 		entityManager.persist(bilan);
-		
+
 		Periode periode = new Periode();
-		
+
 		entityManager.persist(programme);
-		
+
 		PeriodeProgramme pp = new PeriodeProgramme();
 		pp.setPeriode(periode);
 		pp.setProgramme(programme);
 		pp.setOrdrePeriode(1);
 		pp.setUser(u1);
-		
+
 		entityManager.persist(periode);
 		entityManager.persist(pp);
-		
+
 		SeancePeriode spe = new SeancePeriode();
 		spe.setOrdreSeance(1);
 		spe.setPeriode(periode);
 		spe.setSeance(seance);
-		
+
 		entityManager.persist(spe);
-		
+
 		Exercice exercice = new Exercice();
 		exercice.setDescription("desc");
 		entityManager.persist(exercice);
@@ -155,7 +149,7 @@ public class TestRepository {
 		ec.setSeance(seance);
 		ec.setProgramme(programme);
 		entityManager.persist(ec);
-		
+
 		SeanceExercice se = new SeanceExercice();
 
 		se.setExercice(exercice);
@@ -167,7 +161,7 @@ public class TestRepository {
 		Notification notification = new Notification();
 		notification.setEmetteur(u1);
 		notification.setRecepteur(u2);
-		
+
 		entityManager.persist(notification);
 
 	}
