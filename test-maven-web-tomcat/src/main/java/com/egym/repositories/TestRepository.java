@@ -87,6 +87,7 @@ public class TestRepository {
 	Exercice exercice15;
 	Exercice exercice16;
 	Exercice exercice17;
+	Exercice exercice18;
 
 	SeanceExercice se;
 	SeanceExercice se2;
@@ -105,6 +106,7 @@ public class TestRepository {
 	SeanceExercice se15;
 	SeanceExercice se16;
 	SeanceExercice se17;
+	SeanceExercice se18;
 
 	private void createExercices() {
 		exercice = new Exercice();
@@ -113,84 +115,89 @@ public class TestRepository {
 		entityManager.persist(exercice);
 
 		exercice2 = new Exercice();
-		exercice2.setNom("Fentes avant");
+		exercice2.setNom("Fentes avant jambe g");
 		exercice2.setDescription("desc");
 		entityManager.persist(exercice2);
 
 		exercice3 = new Exercice();
-		exercice3.setNom("Crunch");
+		exercice3.setNom("Fentes avant jambe d");
 		exercice3.setDescription("desc");
 		entityManager.persist(exercice3);
 
 		exercice4 = new Exercice();
-		exercice4.setNom("1/2 pompes");
+		exercice4.setNom("Crunch");
 		exercice4.setDescription("desc");
 		entityManager.persist(exercice4);
 
 		exercice5 = new Exercice();
-		exercice5.setNom("1/2 squat");
+		exercice5.setNom("1/2 pompes");
 		exercice5.setDescription("desc");
 		entityManager.persist(exercice5);
 
 		exercice6 = new Exercice();
-		exercice6.setNom("Dips");
+		exercice6.setNom("1/2 squat");
 		exercice6.setDescription("desc");
 		entityManager.persist(exercice6);
 
 		exercice7 = new Exercice();
-		exercice7.setNom("Burpees");
+		exercice7.setNom("Dips");
 		exercice7.setDescription("desc");
 		entityManager.persist(exercice7);
 
 		exercice8 = new Exercice();
-		exercice8.setNom("Pompes à genoux");
+		exercice8.setNom("Burpees");
 		exercice8.setDescription("desc");
 		entityManager.persist(exercice8);
 
 		exercice9 = new Exercice();
-		exercice9.setNom("Mountain climber");
+		exercice9.setNom("Pompes à genoux");
 		exercice9.setDescription("desc");
 		entityManager.persist(exercice9);
 
 		exercice10 = new Exercice();
-		exercice10.setNom("Squat élastique");
+		exercice10.setNom("Mountain climber");
 		exercice10.setDescription("desc");
 		entityManager.persist(exercice10);
 
 		exercice11 = new Exercice();
-		exercice11.setNom("Triceps");
+		exercice11.setNom("Squat élastique");
 		exercice11.setDescription("desc");
 		entityManager.persist(exercice11);
 
 		exercice12 = new Exercice();
-		exercice12.setNom("Extension jambe avec élastique");
+		exercice12.setNom("Triceps");
 		exercice12.setDescription("desc");
 		entityManager.persist(exercice12);
 
 		exercice13 = new Exercice();
-		exercice13.setNom("Etirement1");
+		exercice13.setNom("Extension jambe avec élastique");
 		exercice13.setDescription("desc");
 		entityManager.persist(exercice13);
 
 		exercice14 = new Exercice();
-		exercice14.setNom("Etirement2");
+		exercice14.setNom("Etirement1");
 		exercice14.setDescription("desc");
 		entityManager.persist(exercice14);
 
 		exercice15 = new Exercice();
-		exercice15.setNom("Etirement3");
+		exercice15.setNom("Etirement2");
 		exercice15.setDescription("desc");
 		entityManager.persist(exercice15);
 
 		exercice16 = new Exercice();
-		exercice16.setNom("Etirement4");
+		exercice16.setNom("Etirement3");
 		exercice16.setDescription("desc");
 		entityManager.persist(exercice16);
 
 		exercice17 = new Exercice();
-		exercice17.setNom("Etirement5");
+		exercice17.setNom("Etirement4");
 		exercice17.setDescription("desc");
 		entityManager.persist(exercice17);
+
+		exercice18 = new Exercice();
+		exercice18.setNom("Etirement5");
+		exercice18.setDescription("desc");
+		entityManager.persist(exercice18);
 
 		se = new SeanceExercice();
 
@@ -249,10 +256,10 @@ public class TestRepository {
 		se7 = new SeanceExercice();
 
 		se7.setExercice(exercice7);
-		se7.setSeance(seance2);
-		se7.setOrdreSeance(2);
-		se7.setOrdreExercice(1);
-		se7.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		se7.setSeance(seance);
+		se7.setOrdreSeance(1);
+		se7.setOrdreExercice(7);
+		se7.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
 		entityManager.persist(se7);
 
 		se8 = new SeanceExercice();
@@ -260,7 +267,7 @@ public class TestRepository {
 		se8.setExercice(exercice8);
 		se8.setSeance(seance2);
 		se8.setOrdreSeance(2);
-		se8.setOrdreExercice(2);
+		se8.setOrdreExercice(1);
 		se8.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
 		entityManager.persist(se8);
 
@@ -269,7 +276,7 @@ public class TestRepository {
 		se9.setExercice(exercice9);
 		se9.setSeance(seance2);
 		se9.setOrdreSeance(2);
-		se9.setOrdreExercice(3);
+		se9.setOrdreExercice(2);
 		se9.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
 		entityManager.persist(se9);
 
@@ -278,7 +285,7 @@ public class TestRepository {
 		se10.setExercice(exercice10);
 		se10.setSeance(seance2);
 		se10.setOrdreSeance(2);
-		se10.setOrdreExercice(4);
+		se10.setOrdreExercice(3);
 		se10.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
 		entityManager.persist(se10);
 
@@ -287,7 +294,7 @@ public class TestRepository {
 		se11.setExercice(exercice11);
 		se11.setSeance(seance2);
 		se11.setOrdreSeance(2);
-		se11.setOrdreExercice(5);
+		se11.setOrdreExercice(4);
 		se11.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
 		entityManager.persist(se11);
 
@@ -296,7 +303,7 @@ public class TestRepository {
 		se12.setExercice(exercice12);
 		se12.setSeance(seance2);
 		se12.setOrdreSeance(2);
-		se12.setOrdreExercice(6);
+		se12.setOrdreExercice(5);
 		se12.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
 		entityManager.persist(se12);
 
@@ -305,7 +312,7 @@ public class TestRepository {
 		se13.setExercice(exercice8);
 		se13.setSeance(seance2);
 		se13.setOrdreSeance(2);
-		se13.setOrdreExercice(7);
+		se13.setOrdreExercice(6);
 		se13.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
 		entityManager.persist(se13);
 
@@ -314,7 +321,7 @@ public class TestRepository {
 		se14.setExercice(exercice9);
 		se14.setSeance(seance2);
 		se14.setOrdreSeance(2);
-		se14.setOrdreExercice(8);
+		se14.setOrdreExercice(7);
 		se14.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
 		entityManager.persist(se14);
 
@@ -323,7 +330,7 @@ public class TestRepository {
 		se15.setExercice(exercice10);
 		se15.setSeance(seance2);
 		se15.setOrdreSeance(2);
-		se15.setOrdreExercice(9);
+		se15.setOrdreExercice(8);
 		se15.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
 		entityManager.persist(se15);
 
@@ -332,7 +339,7 @@ public class TestRepository {
 		se16.setExercice(exercice11);
 		se16.setSeance(seance2);
 		se16.setOrdreSeance(2);
-		se16.setOrdreExercice(10);
+		se16.setOrdreExercice(9);
 		se16.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
 		entityManager.persist(se16);
 
@@ -341,9 +348,18 @@ public class TestRepository {
 		se17.setExercice(exercice12);
 		se17.setSeance(seance2);
 		se17.setOrdreSeance(2);
-		se17.setOrdreExercice(11);
+		se17.setOrdreExercice(10);
 		se17.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
 		entityManager.persist(se17);
+
+		se18 = new SeanceExercice();
+
+		se18.setExercice(exercice12);
+		se18.setSeance(seance2);
+		se18.setOrdreSeance(2);
+		se18.setOrdreExercice(11);
+		se18.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se18);
 	}
 
 	private void createPeriodes() {
