@@ -51,7 +51,7 @@ public class SeanceRepository {
 	 * Méthode pour persister une seance affectee à un client pour un client
 	 * 
 	 * @param seance
-	 * @param sp
+	 * @param sp11
 	 */
 	public void persist(Seance seance, SeanceClient sc) {
 

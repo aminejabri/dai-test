@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,7 +38,8 @@ import com.egym.repositories.TestRepository;
 import com.egym.repositories.UserRepository;
 
 @Controller
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/")
+@Transactional
 public class TestController {
 
 	@PersistenceContext
@@ -59,16 +61,12 @@ public class TestController {
 	public String populateDataBase() {
 
 		createInstances();
-		return "done";
+		return "login";
 	}
 
 	private void createInstances() {
-		testRepo.createUsers();
-		User u1 = userRepo.getUserByUsername("chleo");
-		User u2 = userRepo.getUserByUsername("georges");
-		User u3 = userRepo.getUserByUsername("jd");
 
-		testRepo.createInstance(Arrays.asList(u1, u2, u3));
+		testRepo.createInstance();
 	}
 
 	@GetMapping(value = "/ajouterProgramme")
@@ -147,7 +145,6 @@ public class TestController {
 		pp.setPeriode(periode);
 		pp.setProgramme(programme);
 		pp.setOrdrePeriode(1);
-		pp.setUser(u1);
 
 		entityManager.persist(pp);
 

@@ -11,23 +11,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "COMPOSER_PER_PRO")
-public class PeriodeProgramme {
+@Table(name = "COMPOSER_PER_UTIL")
+public class PeriodeClient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CPP_ID")
+	@Column(name = "CPU_ID")
 	Integer id;
 
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Programme.class)
-	@JoinColumn(name = "CPP_PROG_ID")
+	@JoinColumn(name = "CPU_PROG_ID")
 	Programme programme;
 
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@JoinColumn(name = "CPU_UTIL_ID")
+	User user;
+
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Periode.class)
-	@JoinColumn(name = "CPP_PER_ID")
+	@JoinColumn(name = "CPU_PER_ID")
 	Periode periode;
 
-	@Column(name = "CPP_ORDRE_PER")
+	@Column(name = "CPU_ORDRE_PER")
 	Integer ordrePeriode;
 
 	public Integer getId() {
@@ -44,6 +48,14 @@ public class PeriodeProgramme {
 
 	public void setProgramme(Programme programme) {
 		this.programme = programme;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Periode getPeriode() {

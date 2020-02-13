@@ -2,7 +2,6 @@ package com.egym.repositories;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,19 +11,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.egym.entity.Exercice;
-import com.egym.entity.ExerciceClient;
-import com.egym.entity.Notification;
+import com.egym.entity.Periode;
 import com.egym.entity.Profil;
 import com.egym.entity.Programme;
 import com.egym.entity.Seance;
 import com.egym.entity.SeanceExercice;
-import com.egym.entity.SeancePeriode;
 import com.egym.entity.SeanceProgramme;
 import com.egym.entity.User;
 import com.egym.entity.enums.RoleEnum;
 import com.egym.entity.enums.TypeExercice;
 import com.egym.entity.enums.TypeProgramme;
 import com.egym.entity.enums.TypeSeance;
+import com.egym.services.ProgrammeService;
 
 @Transactional
 @Repository
@@ -34,108 +32,318 @@ public class TestRepository {
 	EntityManager entityManager;
 
 	@Autowired
+	ProgrammeService programmeService;
+
+	@Autowired
 	UserRepository userRepo;
 
-	@Transactional
-	public void createUsers() {
+	User admin;
+	User u1;
+	User u2;
+	User u3;
 
-		User admin;
-		if (!userRepo.usernameExists("admin")) {
-			admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", new Date(634815155L),
-					Arrays.asList(RoleEnum.values()));
-			entityManager.persist(admin);
-		}
+	Periode periode;
+	Periode periode2;
 
-		User u1;
-		if (!userRepo.usernameExists("chleo")) {
-			u1 = new User("chleo", "chleo", "chleo@chleo", "chleo", "chleo", new Date(634815155L),
-					Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u1);
-		}
+	@Transactional(rollbackFor = Exception.class)
+	public void createInstance() {
 
-		User u2;
-		if (!userRepo.usernameExists("georges")) {
-			u2 = new User("georges", "georges", "georges@georges", "georges", "georges", new Date(697887155L),
-					Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u2);
-		}
+		createUsers();
 
-		User u3;
-		if (!userRepo.usernameExists("jd")) {
-			u3 = new User("jd", "jd", "jd@jd", "jd", "jd", new Date(697887155L), Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u3);
-		}
+		createProfiles();
+
+		createProgrammes();
+
+		createSeances();
+
+		createPeriodes();
+
+		createExercices();
+
+		affectProgrammes();
 	}
 
-	Programme programme;
-	Programme programme1;
-	Programme programme2;
+	private void affectProgrammes() {
 
-	void createProgrammes() {
-
-		programme = new Programme();
-		programme.setNom("prog1");
-		programme.setType(TypeProgramme.NORMAL);
-
-		entityManager.persist(programme);
-
-		programme1 = new Programme();
-		programme1.setNom("prog2");
-		programme1.setType(TypeProgramme.PERSONNALISE);
-
-		programme2 = new Programme();
-		programme2.setNom("prog3");
-		programme2.setType(TypeProgramme.NORMAL);
-
-		entityManager.persist(programme);
-		entityManager.persist(programme1);
-		entityManager.persist(programme2);
-
+		programmeService.affecterProgrammeClient(u1, programme);
+		programmeService.affecterProgrammeClient(u2, programme2);
+		programmeService.affecterProgrammeClient(u2, programme1);
 	}
 
-	Seance seance;
-	Seance seance2;
-	SeanceProgramme sp;
-	SeanceProgramme sp2;
-	SeanceProgramme sp3;
+	Exercice exercice;
+	Exercice exercice2;
+	Exercice exercice3;
+	Exercice exercice4;
+	Exercice exercice5;
+	Exercice exercice6;
+	Exercice exercice7;
+	Exercice exercice8;
+	Exercice exercice9;
+	Exercice exercice10;
+	Exercice exercice11;
+	Exercice exercice12;
+	Exercice exercice13;
+	Exercice exercice14;
+	Exercice exercice15;
+	Exercice exercice16;
+	Exercice exercice17;
 
-	void createSeances() {
+	SeanceExercice se;
+	SeanceExercice se2;
+	SeanceExercice se3;
+	SeanceExercice se4;
+	SeanceExercice se5;
+	SeanceExercice se6;
+	SeanceExercice se7;
+	SeanceExercice se8;
+	SeanceExercice se9;
+	SeanceExercice se10;
+	SeanceExercice se11;
+	SeanceExercice se12;
+	SeanceExercice se13;
+	SeanceExercice se14;
+	SeanceExercice se15;
+	SeanceExercice se16;
+	SeanceExercice se17;
 
-		seance = new Seance();
-		seance2 = new Seance();
-		seance.setType(TypeSeance.BILAN);
-		seance2.setType(TypeSeance.NORMAL);
+	private void createExercices() {
+		exercice = new Exercice();
+		exercice.setNom("Gainage");
+		exercice.setDescription("desc");
+		entityManager.persist(exercice);
 
-		sp = new SeanceProgramme();
-		sp2 = new SeanceProgramme();
-		sp3 = new SeanceProgramme();
+		exercice2 = new Exercice();
+		exercice2.setNom("Fentes avant");
+		exercice2.setDescription("desc");
+		entityManager.persist(exercice2);
 
-		sp.setProgramme(programme);
-		sp.setSeance(seance);
-		sp.setOrdreSeance(1);
+		exercice3 = new Exercice();
+		exercice3.setNom("Crunch");
+		exercice3.setDescription("desc");
+		entityManager.persist(exercice3);
 
-		sp.setProgramme(programme);
-		sp.setSeance(seance2);
-		sp.setOrdreSeance(2);
+		exercice4 = new Exercice();
+		exercice4.setNom("1/2 pompes");
+		exercice4.setDescription("desc");
+		entityManager.persist(exercice4);
 
-		sp2.setProgramme(programme1);
-		sp2.setSeance(seance);
-		sp2.setOrdreSeance(1);
+		exercice5 = new Exercice();
+		exercice5.setNom("1/2 squat");
+		exercice5.setDescription("desc");
+		entityManager.persist(exercice5);
 
-		sp3.setProgramme(programme2);
-		sp3.setSeance(seance2);
-		sp3.setOrdreSeance(1);
+		exercice6 = new Exercice();
+		exercice6.setNom("Dips");
+		exercice6.setDescription("desc");
+		entityManager.persist(exercice6);
 
-		sp3.setProgramme(programme2);
-		sp3.setSeance(seance2);
-		sp3.setOrdreSeance(2);
+		exercice7 = new Exercice();
+		exercice7.setNom("Burpees");
+		exercice7.setDescription("desc");
+		entityManager.persist(exercice7);
 
-		entityManager.persist(seance);
-		entityManager.persist(seance2);
-		entityManager.persist(sp);
-		entityManager.persist(sp2);
-		entityManager.persist(sp3);
+		exercice8 = new Exercice();
+		exercice8.setNom("Pompes à genoux");
+		exercice8.setDescription("desc");
+		entityManager.persist(exercice8);
 
+		exercice9 = new Exercice();
+		exercice9.setNom("Mountain climber");
+		exercice9.setDescription("desc");
+		entityManager.persist(exercice9);
+
+		exercice10 = new Exercice();
+		exercice10.setNom("Squat élastique");
+		exercice10.setDescription("desc");
+		entityManager.persist(exercice10);
+
+		exercice11 = new Exercice();
+		exercice11.setNom("Triceps");
+		exercice11.setDescription("desc");
+		entityManager.persist(exercice11);
+
+		exercice12 = new Exercice();
+		exercice12.setNom("Extension jambe avec élastique");
+		exercice12.setDescription("desc");
+		entityManager.persist(exercice12);
+
+		exercice13 = new Exercice();
+		exercice13.setNom("Etirement1");
+		exercice13.setDescription("desc");
+		entityManager.persist(exercice13);
+
+		exercice14 = new Exercice();
+		exercice14.setNom("Etirement2");
+		exercice14.setDescription("desc");
+		entityManager.persist(exercice14);
+
+		exercice15 = new Exercice();
+		exercice15.setNom("Etirement3");
+		exercice15.setDescription("desc");
+		entityManager.persist(exercice15);
+
+		exercice16 = new Exercice();
+		exercice16.setNom("Etirement4");
+		exercice16.setDescription("desc");
+		entityManager.persist(exercice16);
+
+		exercice17 = new Exercice();
+		exercice17.setNom("Etirement5");
+		exercice17.setDescription("desc");
+		entityManager.persist(exercice17);
+
+		se = new SeanceExercice();
+
+		se.setExercice(exercice);
+		se.setSeance(seance);
+		se.setOrdreExercice(1);
+		se.setTypeExercice(TypeExercice.PERFORMANCE_CHRONOMETRE);
+		se.setOrdreSeance(1);
+		entityManager.persist(se);
+
+		se2 = new SeanceExercice();
+
+		se2.setExercice(exercice2);
+		se2.setSeance(seance);
+		se2.setOrdreExercice(2);
+		se2.setOrdreSeance(1);
+		se2.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
+		entityManager.persist(se2);
+
+		se3 = new SeanceExercice();
+
+		se3.setExercice(exercice3);
+		se3.setSeance(seance);
+		se3.setOrdreSeance(1);
+		se3.setOrdreExercice(3);
+		se3.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
+		entityManager.persist(se3);
+
+		se4 = new SeanceExercice();
+
+		se4.setExercice(exercice4);
+		se4.setSeance(seance);
+		se4.setOrdreSeance(1);
+		se4.setOrdreExercice(4);
+		se4.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
+		entityManager.persist(se4);
+
+		se5 = new SeanceExercice();
+
+		se5.setExercice(exercice5);
+		se5.setSeance(seance);
+		se5.setOrdreSeance(1);
+		se5.setOrdreExercice(5);
+		se5.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
+		entityManager.persist(se5);
+
+		se6 = new SeanceExercice();
+
+		se6.setExercice(exercice6);
+		se6.setSeance(seance);
+		se6.setOrdreSeance(1);
+		se6.setOrdreExercice(6);
+		se6.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
+		entityManager.persist(se6);
+
+		se7 = new SeanceExercice();
+
+		se7.setExercice(exercice7);
+		se7.setSeance(seance2);
+		se7.setOrdreSeance(2);
+		se7.setOrdreExercice(1);
+		se7.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se7);
+
+		se8 = new SeanceExercice();
+
+		se8.setExercice(exercice8);
+		se8.setSeance(seance2);
+		se8.setOrdreSeance(2);
+		se8.setOrdreExercice(2);
+		se8.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se8);
+
+		se9 = new SeanceExercice();
+
+		se9.setExercice(exercice9);
+		se9.setSeance(seance2);
+		se9.setOrdreSeance(2);
+		se9.setOrdreExercice(3);
+		se9.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se9);
+
+		se10 = new SeanceExercice();
+
+		se10.setExercice(exercice10);
+		se10.setSeance(seance2);
+		se10.setOrdreSeance(2);
+		se10.setOrdreExercice(4);
+		se10.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se10);
+
+		se11 = new SeanceExercice();
+
+		se11.setExercice(exercice11);
+		se11.setSeance(seance2);
+		se11.setOrdreSeance(2);
+		se11.setOrdreExercice(5);
+		se11.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se11);
+
+		se12 = new SeanceExercice();
+
+		se12.setExercice(exercice12);
+		se12.setSeance(seance2);
+		se12.setOrdreSeance(2);
+		se12.setOrdreExercice(6);
+		se12.setTypeExercice(TypeExercice.PREDEFINI_REPETITION);
+		entityManager.persist(se12);
+
+		se13 = new SeanceExercice();
+
+		se13.setExercice(exercice8);
+		se13.setSeance(seance2);
+		se13.setOrdreSeance(2);
+		se13.setOrdreExercice(7);
+		se13.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se13);
+
+		se14 = new SeanceExercice();
+
+		se14.setExercice(exercice9);
+		se14.setSeance(seance2);
+		se14.setOrdreSeance(2);
+		se14.setOrdreExercice(8);
+		se14.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se14);
+
+		se15 = new SeanceExercice();
+
+		se15.setExercice(exercice10);
+		se15.setSeance(seance2);
+		se15.setOrdreSeance(2);
+		se15.setOrdreExercice(9);
+		se15.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se15);
+
+		se16 = new SeanceExercice();
+
+		se16.setExercice(exercice11);
+		se16.setSeance(seance2);
+		se16.setOrdreSeance(2);
+		se16.setOrdreExercice(10);
+		se16.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se16);
+
+		se17 = new SeanceExercice();
+
+		se17.setExercice(exercice12);
+		se17.setSeance(seance2);
+		se17.setOrdreSeance(2);
+		se17.setOrdreExercice(11);
+		se17.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
+		entityManager.persist(se17);
 	}
 
 	private void createPeriodes() {
@@ -172,277 +380,209 @@ public class TestRepository {
 		//
 		// entityManager.persist(periode2);
 		// entityManager.persist(pp3);
+		// SeancePeriode spe = new SeancePeriode();
+		// spe.setOrdreSeance(1);
+		// // spe.setPeriode(periode);
+		// spe.setSeance(seance);
+		//
+		// entityManager.persist(spe);
+		//
+		// SeancePeriode spe2 = new SeancePeriode();
+		// spe2.setOrdreSeance(2);
+		// // spe2.setPeriode(periode2);
+		// spe2.setSeance(seance2);
+		//
+		// entityManager.persist(spe2);
 
 	}
 
-	@Transactional(rollbackFor = Exception.class)
-	public void createInstance(List<User> users) {
+	// Bilan bilan = new Bilan();
+	// bilan.setFreqCardiaqueRepos(10.);
+	// bilan.setFreqCardiaqueCible(10.);
+	// bilan.setFreqCardiaqueMax(10.);
+	// bilan.setPoid(10.);
+	// bilan.setIndiceDickson(10.);
+	// bilan.setFreqCardiaque5minAllonge(10.);
+	// bilan.setFreqCardiaque30Flex(10.);
+	// bilan.setFreqCardiaque1min(10.);
+	//
+	// bilan.setSeanceClient(sc);
 
-		Profil profil = new Profil();
+	void createNotifications() {
+
+		// Notification notification = new Notification();
+		// notification.setEmetteur(users.get(0));
+		// notification.setRecepteur(users.get(2));
+		//
+		// entityManager.persist(notification);
+		//
+		// Notification notification2 = new Notification();
+		// notification2.setEmetteur(users.get(0));
+		// notification2.setRecepteur(users.get(2));
+		//
+		// entityManager.persist(notification2);
+		//
+		// Notification notification3 = new Notification();
+		// notification3.setEmetteur(users.get(1));
+		// notification3.setRecepteur(users.get(2));
+		//
+		// entityManager.persist(notification3);
+
+	}
+
+	@Transactional
+	public void createUsers() {
+
+		if (!userRepo.usernameExists("admin")) {
+			admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", new Date(634815155L),
+					Arrays.asList(RoleEnum.values()));
+			entityManager.persist(admin);
+		} else {
+			admin = userRepo.getUserByUsername("admin");
+		}
+
+		if (!userRepo.usernameExists("chleo")) {
+			u1 = new User("chleo", "chleo", "chleo@chleo", "chleo", "chleo", new Date(634815155L),
+					Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u1);
+		} else {
+			u1 = userRepo.getUserByUsername("chleo");
+		}
+
+		if (!userRepo.usernameExists("georges")) {
+			u2 = new User("georges", "georges", "georges@georges", "georges", "georges", new Date(697887155L),
+					Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u2);
+		} else {
+			u2 = userRepo.getUserByUsername("georges");
+		}
+
+		if (!userRepo.usernameExists("jd")) {
+			u3 = new User("jd", "jd", "jd@jd", "jd", "jd", new Date(697887155L), Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u3);
+		} else {
+			u3 = userRepo.getUserByUsername("jd");
+		}
+	}
+
+	Profil profil;
+	Profil profil1;
+	Profil profil2;
+
+	void createProfiles() {
+
+		profil = new Profil();
 		profil.setPoitrine(10.);
 		profil.setTaille(10.);
 		profil.setHanche(10.);
 		profil.setCuisse(10.);
 		profil.setBras(10.);
 		profil.setObj("cest quoi");
-		profil.setClient(users.get(0));
+		profil.setClient(u1);
 
 		entityManager.persist(profil);
 
-		Profil profil1 = new Profil();
+		profil1 = new Profil();
 		profil1.setPoitrine(20.);
 		profil1.setTaille(20.);
 		profil1.setHanche(20.);
 		profil1.setCuisse(20.);
 		profil1.setBras(20.);
 		profil1.setObj("cest quoi");
-		profil1.setClient(users.get(1));
+		profil1.setClient(u2);
 
 		entityManager.persist(profil1);
 
-		Profil profil2 = new Profil();
+		profil2 = new Profil();
 		profil2.setPoitrine(30.);
 		profil2.setTaille(30.);
 		profil2.setHanche(30.);
 		profil2.setCuisse(30.);
 		profil2.setBras(30.);
 		profil2.setObj("cest quoi");
-		profil2.setClient(users.get(2));
+		profil2.setClient(u3);
 
 		entityManager.persist(profil2);
 
-		createProgrammes();
+	}
 
-		createSeances();
+	Programme programme;
+	Programme programme1;
+	Programme programme2;
 
-		createPeriodes();
-		// ProgrammeClient pg = new ProgrammeClient();
-		//
-		// pg.setProgramme(programme);
-		// pg.setUser(users.get(0));
-		//
-		// entityManager.persist(pg);
-		//
-		// ProgrammeClient pg1 = new ProgrammeClient();
-		//
-		// pg1.setProgramme(programme);
-		// pg1.setUser(users.get(0));
-		//
-		// pg1.setProgramme(programme);
-		// pg1.setUser(users.get(1));
-		//
-		// entityManager.persist(pg1);
+	void createProgrammes() {
 
-		// SeanceClient sc = new SeanceClient();
-		// SeanceClient sc2 = new SeanceClient();
-		//
-		// Bilan bilan = new Bilan();
-		// bilan.setFreqCardiaqueRepos(10.);
-		// bilan.setFreqCardiaqueCible(10.);
-		// bilan.setFreqCardiaqueMax(10.);
-		// bilan.setPoid(10.);
-		// bilan.setIndiceDickson(10.);
-		// bilan.setFreqCardiaque5minAllonge(10.);
-		// bilan.setFreqCardiaque30Flex(10.);
-		// bilan.setFreqCardiaque1min(10.);
-		//
-		// bilan.setSeanceClient(sc);
+		programme = new Programme();
+		programme.setNom("prog1");
+		programme.setType(TypeProgramme.NORMAL);
 
-		// sc.setBilan(bilan);
-		// sc.setProgramme(programme);
-		// sc.setSeance(seance);
-		// sc.setOrdreSeance(1);
-		// sc.setClient(users.get(1));
-		//
-		// sc2.setProgramme(programme2);
-		// sc2.setSeance(seance2);
-		// sc2.setOrdreSeance(1);
-		// sc2.setClient(users.get(2));
-		//
-		// entityManager.persist(bilan);
-		// entityManager.persist(programme);
-		// entityManager.persist(sc);
-		//
-		// entityManager.persist(bilan);
-		// entityManager.persist(programme2);
-		// entityManager.persist(sc2);
+		programme1 = new Programme();
+		programme1.setNom("prog2");
+		programme1.setType(TypeProgramme.PERSONNALISE);
 
-		SeancePeriode spe = new SeancePeriode();
-		spe.setOrdreSeance(1);
-		// spe.setPeriode(periode);
-		spe.setSeance(seance);
+		programme2 = new Programme();
+		programme2.setNom("prog3");
+		programme2.setType(TypeProgramme.NORMAL);
 
-		entityManager.persist(spe);
+		entityManager.persist(programme);
+		entityManager.persist(programme1);
+		entityManager.persist(programme2);
 
-		SeancePeriode spe2 = new SeancePeriode();
-		spe2.setOrdreSeance(2);
-		// spe2.setPeriode(periode2);
-		spe2.setSeance(seance2);
+	}
 
-		entityManager.persist(spe2);
+	Seance seance;
+	Seance seance2;
+	SeanceProgramme sp11;
+	SeanceProgramme sp12;
+	SeanceProgramme sp21;
+	SeanceProgramme sp32;
+	SeanceProgramme sp32_;
 
-		Exercice exercice = new Exercice();
-		exercice.setNom("Gainage");
-		exercice.setDescription("desc");
-		entityManager.persist(exercice);
+	SeanceProgramme sp2;
+	SeanceProgramme sp3;
+	SeanceProgramme sp4;
+	SeanceProgramme sp5;
 
-		Exercice exercice2 = new Exercice();
-		exercice2.setNom("Fentes avant");
-		exercice2.setDescription("desc");
-		entityManager.persist(exercice2);
+	void createSeances() {
 
-		Exercice exercice3 = new Exercice();
-		exercice3.setNom("Crunch");
-		exercice3.setDescription("desc");
-		entityManager.persist(exercice3);
+		seance = new Seance();
+		seance2 = new Seance();
+		seance.setType(TypeSeance.BILAN);
+		seance2.setType(TypeSeance.NORMAL);
 
-		Exercice exercice4 = new Exercice();
-		exercice4.setNom("1/2 pompes");
-		exercice4.setDescription("desc");
-		entityManager.persist(exercice4);
+		sp11 = new SeanceProgramme();
+		sp12 = new SeanceProgramme();
+		sp21 = new SeanceProgramme();
+		sp32 = new SeanceProgramme();
+		sp32_ = new SeanceProgramme();
 
-		Exercice exercice5 = new Exercice();
-		exercice5.setNom("1/2 squat");
-		exercice5.setDescription("desc");
-		entityManager.persist(exercice5);
+		sp11.setProgramme(programme);
+		sp11.setSeance(seance);
+		sp11.setOrdreSeance(1);
 
-		Exercice exercice6 = new Exercice();
-		exercice6.setNom("Dips");
-		exercice6.setDescription("desc");
-		entityManager.persist(exercice6);
+		sp12.setProgramme(programme);
+		sp12.setSeance(seance2);
+		sp12.setOrdreSeance(2);
 
-		Exercice exercice7 = new Exercice();
-		exercice7.setNom("Burpees");
-		exercice7.setDescription("desc");
-		entityManager.persist(exercice7);
+		sp21.setProgramme(programme1);
+		sp21.setSeance(seance);
+		sp21.setOrdreSeance(1);
 
-		Exercice exercice8 = new Exercice();
-		exercice8.setNom("Mountain climber");
-		exercice8.setDescription("desc");
-		entityManager.persist(exercice8);
+		sp32.setProgramme(programme2);
+		sp32.setSeance(seance2);
+		sp32.setOrdreSeance(1);
 
-		Exercice exercice9 = new Exercice();
-		exercice9.setNom("Squat élastique");
-		exercice9.setDescription("desc");
-		entityManager.persist(exercice9);
+		sp32_.setProgramme(programme2);
+		sp32_.setSeance(seance2);
+		sp32_.setOrdreSeance(2);
 
-		Exercice exercice10 = new Exercice();
-		exercice10.setNom("Triceps");
-		exercice10.setDescription("desc");
-		entityManager.persist(exercice10);
-
-		Exercice exercice11 = new Exercice();
-		exercice11.setNom("Extension jambe avec élastique");
-		exercice11.setDescription("desc");
-		entityManager.persist(exercice11);
-
-		ExerciceClient ec = new ExerciceClient();
-		ec.setClient(users.get(0));
-		ec.setExercice(exercice);
-		ec.setOrdreSeance(1);
-		ec.setOrdreExercice(1);
-		ec.setSeance(seance);
-		ec.setProgramme(programme);
-		entityManager.persist(ec);
-
-		ExerciceClient ec2 = new ExerciceClient();
-		ec2.setClient(users.get(0));
-		ec2.setExercice(exercice2);
-		ec2.setOrdreSeance(1);
-		ec2.setOrdreExercice(1);
-		ec2.setSeance(seance);
-		ec2.setProgramme(programme);
-		entityManager.persist(ec2);
-
-		ExerciceClient ec3 = new ExerciceClient();
-		ec3.setClient(users.get(0));
-		ec3.setExercice(exercice2);
-		ec3.setOrdreSeance(1);
-		ec3.setOrdreExercice(1);
-		ec3.setSeance(seance2);
-		ec3.setProgramme(programme);
-		entityManager.persist(ec3);
-
-		ExerciceClient ec4 = new ExerciceClient();
-		ec4.setClient(users.get(1));
-		ec4.setExercice(exercice2);
-		ec4.setOrdreSeance(1);
-		ec4.setOrdreExercice(1);
-		ec4.setSeance(seance2);
-		ec4.setProgramme(programme);
-		entityManager.persist(ec4);
-
-		ExerciceClient ec5 = new ExerciceClient();
-		ec5.setClient(users.get(2));
-		ec5.setExercice(exercice4);
-		ec5.setOrdreSeance(1);
-		ec5.setOrdreExercice(1);
-		ec5.setSeance(seance2);
-		ec5.setProgramme(programme2);
-		entityManager.persist(ec5);
-
-		ExerciceClient ec6 = new ExerciceClient();
-		ec6.setClient(users.get(0));
-		ec6.setExercice(exercice2);
-		ec6.setOrdreSeance(1);
-		ec6.setOrdreExercice(2);
-		ec6.setSeance(seance2);
-		ec6.setProgramme(programme);
-		entityManager.persist(ec6);
-
-		SeanceExercice se = new SeanceExercice();
-
-		se.setExercice(exercice);
-		se.setSeance(seance);
-		se.setOrdreExercice(1);
-		se.setTypeExercice(TypeExercice.PERFORMANCE_CHRONOMETRE);
-		se.setOrdreSeance(1);
-		entityManager.persist(se);
-
-		SeanceExercice se2 = new SeanceExercice();
-
-		se2.setExercice(exercice2);
-		se2.setSeance(seance);
-		se2.setOrdreExercice(2);
-		se2.setOrdreSeance(1);
-		se2.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
-		entityManager.persist(se2);
-
-		SeanceExercice se3 = new SeanceExercice();
-
-		se3.setExercice(exercice);
-		se3.setSeance(seance2);
-		se3.setOrdreSeance(1);
-		se3.setOrdreExercice(1);
-		se3.setTypeExercice(TypeExercice.PREDEFINI_CHRONOMETRE);
-		entityManager.persist(se3);
-
-		SeanceExercice se4 = new SeanceExercice();
-
-		se4.setExercice(exercice2);
-		se4.setSeance(seance2);
-		se4.setOrdreSeance(2);
-		se4.setOrdreExercice(1);
-		se4.setTypeExercice(TypeExercice.PERFORMANCE_REPETITION);
-		entityManager.persist(se4);
-
-		Notification notification = new Notification();
-		notification.setEmetteur(users.get(0));
-		notification.setRecepteur(users.get(2));
-
-		entityManager.persist(notification);
-
-		Notification notification2 = new Notification();
-		notification2.setEmetteur(users.get(0));
-		notification2.setRecepteur(users.get(2));
-
-		entityManager.persist(notification2);
-
-		Notification notification3 = new Notification();
-		notification3.setEmetteur(users.get(1));
-		notification3.setRecepteur(users.get(2));
-
-		entityManager.persist(notification3);
+		entityManager.persist(seance);
+		entityManager.persist(seance2);
+		entityManager.persist(sp11);
+		entityManager.persist(sp12);
+		entityManager.persist(sp21);
+		entityManager.persist(sp32);
+		entityManager.persist(sp32_);
 
 	}
 
