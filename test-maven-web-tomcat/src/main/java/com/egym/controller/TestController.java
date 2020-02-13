@@ -38,7 +38,7 @@ import com.egym.repositories.TestRepository;
 import com.egym.repositories.UserRepository;
 
 @Controller
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/")
 @Transactional
 public class TestController {
 
@@ -61,7 +61,7 @@ public class TestController {
 	public String populateDataBase() {
 
 		createInstances();
-		return "done";
+		return "login";
 	}
 
 	private void createInstances() {
