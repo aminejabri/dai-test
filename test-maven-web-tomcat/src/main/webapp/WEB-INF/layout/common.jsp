@@ -58,10 +58,10 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
+          <li id="notificationCoach" class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">1</span>
+              <span class="label label-success">${notificationcoach.countNotif} </span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>

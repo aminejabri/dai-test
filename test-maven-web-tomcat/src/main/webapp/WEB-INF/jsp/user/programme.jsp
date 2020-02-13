@@ -14,6 +14,7 @@
 					<ul class="nav nav-tabs">
 						<li><a href="/user/profil">Profile</a></li>
 						<li class="active"><a href="#timeline">Programmes</a></li>
+						<li><a href="http://localhost:8080/user/profil" data-toggle="tab">Bilan</a></li>
 					</ul>
 					<!-- /.box -->
 
@@ -39,26 +40,25 @@
 									</div>
 								</div>
 								<div class="box-body">
-									<c:forEach items="${myModel}" var="seanceClient"
-										varStatus="status">
-										${seanceClient.ordreSeance }
-								</c:forEach>
+									
 
 									<table class="table table-condensed">
-										<tr>
+										
+											<tr>
 
-											<th>Séance</th>
-											<th>Action</th>
-										</tr>
+												<th>Séance</th>
+												<th>Action</th>
+											</tr>
 
-										<tr>
-											<td>Séance 1</td>
-											<td><a href="http://localhost:8080/user/inscription"
-												target="_blank"> <input type="button" value="Démarrer">
-											</a>
-											<td>
-										</tr>
+											<tr>
 
+												<td>Séance </td>
+												<td><a href="http://localhost:8080/user/inscription"
+													target="_blank"> <input type="button" value="Démarrer">
+												</a>
+												<td>
+											</tr>
+										
 									</table>
 								</div>
 								<br>
@@ -75,22 +75,25 @@
 									<div class="box-body">
 
 										<table class="table table-condensed">
+										
 											<tr>
 
 												<th>Séance</th>
 												<th>Action</th>
 											</tr>
+											<c:forEach items="${myModel}" var="seanceClient"
+											varStatus="status">
 											<tr>
-												<td>Séance 1</td>
-												<td><a href="http://localhost:8080/user/inscription"
-													target="_blank"> <input type="button" value="Consulter">
-												</a>
+												<td>Séance : ${seanceClient.ordreSeance}</td>
+												<td id = "${seanceClient.id}" hidden="true"></td> 
+												<td><a href="/seance/exercice/${seanceClient.id}"><input class =  id="${seanceClient.id}" type="button" value="Consulter"></</a>
 												<td>
 											</tr>
-
+										</c:forEach>
 										</table>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 

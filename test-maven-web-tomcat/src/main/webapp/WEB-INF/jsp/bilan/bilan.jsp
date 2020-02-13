@@ -127,7 +127,7 @@
 													<th>Eval 1</th>
 												</tr>
 												<tr>
-													<td><img class="img-responsive img-circle" src="/resources/img/exercice/gainage.png"></td>
+													<td><img class="img-responsive img-circle" src="/resources/img/exercice/${myModel[1].exercicesClient[0].performance}"></td>
 													<td colspan=2>Gainage</td>
 													<td>${myModel[1].exercicesClient[0].performance}</td>
 												</tr>
