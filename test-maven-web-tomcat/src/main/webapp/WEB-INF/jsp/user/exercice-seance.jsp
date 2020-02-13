@@ -29,42 +29,12 @@
 
 							<!-- /.box-header -->
 							<div class="box box-default" data-select2-id="16">
-								<div class="box-header with-border">
-									<h3 class="box-title">Demarrer la seance en cours</h3>
-
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-									</div>
-								</div>
-								<div class="box-body">
-									
-
-									<table class="table table-condensed">
-										
-											<tr>
-
-												<th>Séance</th>
-												<th>Action</th>
-											</tr>
-
-											<tr>
-
-												<td>Séance </td>
-												<td><a href="http://localhost:8080/user/inscription"
-													target="_blank"> <input type="button" value="Démarrer">
-												</a>
-												<td>
-											</tr>
-										
-									</table>
-								</div>
+						
+							
 								<br>
 								<div class="box box-default" data-select2-id="16">
 									<div class="box-header with-border">
-										<h3 class="box-title">Liste des seance du programme</h3>
+										<h3 class="box-title">Liste des des exercices</h3>
 										<div class="box-tools pull-right">
 											<button type="button" class="btn btn-box-tool"
 												data-widget="collapse">
@@ -81,13 +51,12 @@
 												<th>Séance</th>
 												<th>Action</th>
 											</tr>
-											<c:forEach items="${myModel}" var="seanceClient"
+											<c:forEach items="${myModel}" var="exerciceClient"
 											varStatus="status">
 											<tr>
-												<td>Séance : ${seanceClient.ordreSeance}</td>
-												<td id = "${seanceClient.id}" hidden="true"></td> 
-												<td><a href="/seance/exercice/${seanceClient.id}"><input class =  id="${seanceClient.id}" type="button" value="Consulter"></</a>
-												<td>
+												<td>Id Exercice : ${exerciceClient.id}</td>
+											
+												
 											</tr>
 										</c:forEach>
 										</table>

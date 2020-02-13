@@ -13,7 +13,7 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#activity" data-toggle="tab">Profile</a></li>
 						<li><a href="/programme/list" >Programmes</a></li>
-						<!--li><a href="#settings" data-toggle="tab">Settings</a></li-->
+						<li><a href="/programme/list" >Settings</a></li>
 					</ul>
 						<div class="active tab-pane" id="activity">
 
@@ -109,8 +109,8 @@
 									</div>
 								</div>
 
+								</div>
 
-							</div>
 
 							<!-- /.box-body -->
 						</div>

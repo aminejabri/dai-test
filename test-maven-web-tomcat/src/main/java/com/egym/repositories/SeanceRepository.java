@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.egym.entity.Bilan;
 import com.egym.entity.Exercice;
+import com.egym.entity.ExerciceClient;
 import com.egym.entity.Seance;
 import com.egym.entity.SeanceClient;
 import com.egym.entity.SeanceExercice;
@@ -115,6 +116,15 @@ public class SeanceRepository {
 		query.append("select se from SeanceExercice se where se.seance.id in (:idSeances)");
 
 		return (List<SeanceExercice>) entityManager.createQuery(query.toString()).setParameter("idSeances", idSeances)
+				.getResultList();
+	}
+
+	public List<ExerciceClient> getExerciceBySeanceId(Integer id) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select ec from ExerciceClient ec where ec.seance.id = :id");
+
+		return (List<ExerciceClient>) entityManager.createQuery(query.toString()).setParameter("id", id)
 				.getResultList();
 	}
 

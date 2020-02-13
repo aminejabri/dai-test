@@ -66,7 +66,6 @@
 								</div>
 							</div>
 
-
 							<div class="box-body">
 								<div class="box box-default collapsed-box">
 									<div class="box-header with-border">

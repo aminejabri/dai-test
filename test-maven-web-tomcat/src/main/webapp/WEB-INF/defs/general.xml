@@ -93,11 +93,19 @@
 		<put-attribute name="title" value="Programme" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/programme.jsp" />
 		<put-attribute name="current" value="programme" />
+		 <put-list-attribute name="javascripts">
+            <add-attribute value="/resources/app/user/exercice-seance.js" />
+          </put-list-attribute>
 	</definition>
 	
 	<definition name="home" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
 		<put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+	</definition>
+	
+	<definition name="exercice-seance" extends="common">
+		<put-attribute name="title" value="Exercices" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user/exercice-seance.jsp" />
 	</definition>
 	
 	<!-- 	Mapping for Error Pages -->
