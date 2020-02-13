@@ -20,7 +20,7 @@
 							<!-- Profile Image -->
 							<div class="box-body box-profile">
 								<img class="profile-user-img img-responsive img-circle"
-									src="../../dist/img/user4-128x128.jpg"
+									src=""
 									alt="User profile picture">
 
 								<h3 class="profile-username text-center">

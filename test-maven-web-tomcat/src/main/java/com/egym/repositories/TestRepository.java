@@ -112,16 +112,21 @@ public class TestRepository {
 		exercice = new Exercice();
 		exercice.setNom("Gainage");
 		exercice.setDescription("desc");
+		exercice.setImageUrl("gainage.png");
 		entityManager.persist(exercice);
 
 		exercice2 = new Exercice();
 		exercice2.setNom("Fentes avant jambe g");
 		exercice2.setDescription("desc");
+		exercice2.setImageUrl("fente.gif");
 		entityManager.persist(exercice2);
 
 		exercice3 = new Exercice();
 		exercice3.setNom("Fentes avant jambe d");
 		exercice3.setDescription("desc");
+
+		exercice3.setImageUrl("fente.gif");
+
 		entityManager.persist(exercice3);
 
 		exercice4 = new Exercice();
@@ -309,7 +314,7 @@ public class TestRepository {
 
 		se13 = new SeanceExercice();
 
-		se13.setExercice(exercice8);
+		se13.setExercice(exercice13);
 		se13.setSeance(seance2);
 		se13.setOrdreSeance(2);
 		se13.setOrdreExercice(6);
@@ -318,7 +323,7 @@ public class TestRepository {
 
 		se14 = new SeanceExercice();
 
-		se14.setExercice(exercice9);
+		se14.setExercice(exercice14);
 		se14.setSeance(seance2);
 		se14.setOrdreSeance(2);
 		se14.setOrdreExercice(7);
@@ -327,7 +332,7 @@ public class TestRepository {
 
 		se15 = new SeanceExercice();
 
-		se15.setExercice(exercice10);
+		se15.setExercice(exercice15);
 		se15.setSeance(seance2);
 		se15.setOrdreSeance(2);
 		se15.setOrdreExercice(8);
@@ -336,7 +341,7 @@ public class TestRepository {
 
 		se16 = new SeanceExercice();
 
-		se16.setExercice(exercice11);
+		se16.setExercice(exercice16);
 		se16.setSeance(seance2);
 		se16.setOrdreSeance(2);
 		se16.setOrdreExercice(9);
@@ -345,7 +350,7 @@ public class TestRepository {
 
 		se17 = new SeanceExercice();
 
-		se17.setExercice(exercice12);
+		se17.setExercice(exercice17);
 		se17.setSeance(seance2);
 		se17.setOrdreSeance(2);
 		se17.setOrdreExercice(10);
@@ -354,7 +359,7 @@ public class TestRepository {
 
 		se18 = new SeanceExercice();
 
-		se18.setExercice(exercice12);
+		se18.setExercice(exercice18);
 		se18.setSeance(seance2);
 		se18.setOrdreSeance(2);
 		se18.setOrdreExercice(11);
@@ -488,22 +493,22 @@ public class TestRepository {
 	void createProfiles() {
 
 		profil = new Profil();
-		profil.setPoitrine(10.);
-		profil.setTaille(10.);
-		profil.setHanche(10.);
-		profil.setCuisse(10.);
-		profil.setBras(10.);
+		profil.setPoitrine(80.);
+		profil.setTaille(65.);
+		profil.setHanche(90.);
+		profil.setCuisse(100.);
+		profil.setBras(50.);
 		profil.setObj("cest quoi");
 		profil.setClient(u1);
 
 		entityManager.persist(profil);
 
 		profil1 = new Profil();
-		profil1.setPoitrine(20.);
-		profil1.setTaille(20.);
-		profil1.setHanche(20.);
-		profil1.setCuisse(20.);
-		profil1.setBras(20.);
+		profil1.setPoitrine(130.);
+		profil1.setTaille(100.);
+		profil1.setHanche(120.);
+		profil1.setCuisse(150.);
+		profil1.setBras(80.);
 		profil1.setObj("cest quoi");
 		profil1.setClient(u2);
 

@@ -7,18 +7,16 @@
 
 	<!-- Main content -->
 	<section class="content">
-
-		<c:forEach items="${ myModel[1] }" var="bilans" varStatus="status">
 			<div class="row">
 				<div class="col-md-12">
 					<!-- About Me Box -->
-					<div class="box box-primary collapsed-box">
+					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Bilan ${status.count}</h3>
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
-									<i class="fa fa-plus"></i>
+									<i class="fa fa-minus"></i>
 								</button>
 							</div>
 						</div>
@@ -27,7 +25,7 @@
 							<div class="box-body">
 								<div class="box box-default collapsed-box">
 									<div class="box-header with-border">
-										<h3 class="box-title"></h3>
+										<h3 class="box-title">Informations complémentaires</h3>
 
 										<div class="box-tools pull-right">
 											<button type="button" class="btn btn-box-tool"
@@ -43,18 +41,16 @@
 												<div class="form-group" data-select2-id="25">
 													<label>Age</label> <input type="number" id="replyNumber"
 														min="0" max="200" data-bind="value:replyNumber" />
-													<c:forEach items="${ myModel[1] }" var="bilan"
-														varStatus="status">
 														<div class="form-group" data-select2-id="25">
-															<label>Poids</label> ${bilan.poid}
+															<label>Poids</label> ${myModel[1].bilan.poid}
 														</div>
 														<div class="form-group" data-select2-id="25">
-															<label>Fréquence cardiaque au repos</label>${bilan.freqCardiaqueRepos}
+															<label>Fréquence cardiaque au repos</label>${myModel[1].bilan.freqCardiaqueRepos}
 														</div>
 														<div class="form-group" data-select2-id="25">
-															<label>Fréquence cardiaque cible</label>${bilan.freqCardiaqueCible}
+															<label>Fréquence cardiaque cible</label>${myModel[1].bilan.freqCardiaqueCible}
 														</div>
-													</c:forEach>
+													
 													<!-- /.form-group -->
 												</div>
 
@@ -80,8 +76,6 @@
 									</div>
 									<!-- /.box-header -->
 									<div class="box-body">
-										<c:forEach items="${ myModel[1] }" var="bilan"
-											varStatus="status">
 											<table class="table table-bordered">
 												<tbody>
 													<tr>
@@ -90,23 +84,22 @@
 													</tr>
 													<tr>
 														<td>FC après 5 min allongé au calme</td>
-														<td>${bilan.freqCardiaque5minAllonge}</td>
+														<td>${myModel[1].bilan.freqCardiaque5minAllonge}</td>
 													</tr>
 													<tr>
 														<td>FC après 30 flexions complètes en 45 sec</td>
-														<td>${bilan.freqCardiaque30Flex}</td>
+														<td>${myModel[1].bilan.freqCardiaque30Flex}</td>
 													</tr>
 													<tr>
 														<td>FC 1 min après exercice allongé</td>
-														<td>${bilan.freqCardiaque1min}</td>
+														<td>${myModel[1].bilan.freqCardiaque1min}</td>
 													</tr>
 													<tr>
-														<td>Indice de Ruffier Dickson</td>
-														<td>${bilan.indiceDickson}</td>
+														<td>Indice Dickson</td>
+														<td>${myModel[1].bilan.indiceDickson}</td>
 													</tr>
 												</tbody>
 											</table>
-										</c:forEach>
 										
 									</div>
 								</div>
@@ -129,52 +122,44 @@
 										<table class="table table-bordered">
 											<tbody>
 												<tr>
-													<th>Image</th>
-													<th colspan=2>Description</th>
+													<th></th>
+													<th colspan=2></th>
 													<th>Eval 1</th>
 												</tr>
 												<tr>
-													<td><img class="img-responsive" src="" alt=""></td>
+													<td><img class="img-responsive img-circle" src="/resources/img/exercice/gainage.png"></td>
 													<td colspan=2>Gainage</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[0].performance}</td>
 												</tr>
 												<tr>
-													<td rowspan=2><img class="img-responsive" src=""
-														alt=""></td>
+													<td rowspan=2><img class="img-responsive" src="/resources/img/exercice/fente.gif"></td>
 													<td rowspan=2>Fentes avant</td>
 													<td>jambe gauche devant</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[1].performance}</td>
 												</tr>
 												<tr>
 													<td>jambe droite devant</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[2].performance}</td>
 												</tr>
 												<tr>
-													<td><img class="img-responsive" src="" alt=""></td>
+													<td><img class="img-responsive" src="/resources/img/exercice/crunch.gif"></td>
 													<td colspan=2>Crunch</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[3].performance}</td>
 												</tr>
 												<tr>
-													<td><img class="img-responsive" src="" alt=""></td>
+													<td><img class="img-responsive" src="/resources/img/exercice/pompes.gif"></td>
 													<td colspan=2>1/2 pompes</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[4].performance}</td>
 												</tr>
 												<tr>
-													<td><img class="img-responsive" src="" alt=""></td>
+													<td><img class="img-responsive" src="/resources/img/exercice/squat.gif" ></td>
 													<td colspan=2>1/2 squat</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[5].performance}</td>
 												</tr>
 												<tr>
-													<td><img class="img-responsive" src="" alt=""></td>
+													<td><img class="img-responsive" src="/resources/img/exercice/dips.gif" ></td>
 													<td colspan=2>Dips</td>
-													<td><input type="number" id="replyNumber" min="0"
-														max="200" data-bind="value:replyNumber" /></td>
+													<td>${myModel[1].exercicesClient[6].performance}</td>
 												</tr>
 											</tbody>
 										</table>
@@ -195,7 +180,6 @@
 									</div>
 									<!-- /.box-header --><!-- 
 									<div class="box-body">
-										<c:forEach items="${ myModel[1] }" var="bilan"
 											varStatus="status">
 											<table class="table table-bordered">
 												<tbody>
@@ -225,7 +209,6 @@
 													</tr>
 												</tbody>
 											</table>
-										</c:forEach>
 									</div>
 								</div>
 							</div>-->
@@ -236,7 +219,6 @@
 				</div>
 			</div>
 			<!-- /.row -->
-		</c:forEach>
 	</section>
 	<!-- /.content -->
 </div>

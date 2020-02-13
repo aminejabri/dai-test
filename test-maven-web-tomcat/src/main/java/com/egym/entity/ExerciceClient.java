@@ -1,5 +1,7 @@
 package com.egym.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +19,12 @@ import com.egym.entity.enums.StatutExercice;
 
 @Entity
 @Table(name = "UTIL_EXERCICE")
-public class ExerciceClient {
+public class ExerciceClient implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

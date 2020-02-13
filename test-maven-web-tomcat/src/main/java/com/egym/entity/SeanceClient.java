@@ -1,5 +1,7 @@
 package com.egym.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +17,12 @@ import com.egym.entity.enums.StatutSeance;
 
 @Entity
 @Table(name = "UTIL_SEANCE")
-public class SeanceClient {
+public class SeanceClient implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
