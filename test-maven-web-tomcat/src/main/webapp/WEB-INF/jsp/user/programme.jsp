@@ -1,3 +1,4 @@
+<%@ include file="../../layout/taglib.jsp"%>
 <div class="content-wrapper" style="min-height: 1135.67px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -38,12 +39,18 @@
 									</div>
 								</div>
 								<div class="box-body">
+									<c:forEach items="${myModel}" var="seanceClient"
+										varStatus="status">
+										${seanceClient.ordreSeance }
+								</c:forEach>
+
 									<table class="table table-condensed">
 										<tr>
 
 											<th>Séance</th>
 											<th>Action</th>
 										</tr>
+
 										<tr>
 											<td>Séance 1</td>
 											<td><a href="http://localhost:8080/user/inscription"
@@ -58,7 +65,6 @@
 								<div class="box box-default" data-select2-id="16">
 									<div class="box-header with-border">
 										<h3 class="box-title">Liste des seance du programme</h3>
-
 										<div class="box-tools pull-right">
 											<button type="button" class="btn btn-box-tool"
 												data-widget="collapse">
@@ -66,7 +72,24 @@
 											</button>
 										</div>
 									</div>
-									<div class="box-body"></div>
+									<div class="box-body">
+
+										<table class="table table-condensed">
+											<tr>
+
+												<th>Séance</th>
+												<th>Action</th>
+											</tr>
+											<tr>
+												<td>Séance 1</td>
+												<td><a href="http://localhost:8080/user/inscription"
+													target="_blank"> <input type="button" value="Consulter">
+												</a>
+												<td>
+											</tr>
+
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
