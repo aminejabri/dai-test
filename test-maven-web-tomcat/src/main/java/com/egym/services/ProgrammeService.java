@@ -92,7 +92,7 @@ public class ProgrammeService {
 			SeanceClient seanceClient = new SeanceClient();
 			seanceClient.setClient(client);
 			seanceClient.setOrdreSeance(seanceProgramme.getOrdreSeance());
-			seanceClient.setProgramme(seanceClient.getProgramme());
+			seanceClient.setProgramme(seanceProgramme.getProgramme());
 			seanceClient.setSeance(seanceProgramme.getSeance());
 			if (TypeSeance.BILAN.equals(seanceProgramme.getSeance().getType())) {
 				Bilan bilan = new Bilan();

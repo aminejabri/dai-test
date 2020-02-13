@@ -2,7 +2,6 @@ package com.egym.repositories;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +22,7 @@ import com.egym.entity.enums.RoleEnum;
 import com.egym.entity.enums.TypeExercice;
 import com.egym.entity.enums.TypeProgramme;
 import com.egym.entity.enums.TypeSeance;
+import com.egym.services.ProgrammeService;
 
 @Transactional
 @Repository
@@ -32,6 +32,9 @@ public class TestRepository {
 	EntityManager entityManager;
 
 	@Autowired
+	ProgrammeService programmeService;
+
+	@Autowired
 	UserRepository userRepo;
 
 	User admin;
@@ -39,159 +42,15 @@ public class TestRepository {
 	User u2;
 	User u3;
 
-	@Transactional
-	public void createUsers() {
-
-		if (!userRepo.usernameExists("admin")) {
-			admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", new Date(634815155L),
-					Arrays.asList(RoleEnum.values()));
-			entityManager.persist(admin);
-		}
-
-		if (!userRepo.usernameExists("chleo")) {
-			u1 = new User("chleo", "chleo", "chleo@chleo", "chleo", "chleo", new Date(634815155L),
-					Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u1);
-		}
-
-		if (!userRepo.usernameExists("georges")) {
-			u2 = new User("georges", "georges", "georges@georges", "georges", "georges", new Date(697887155L),
-					Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u2);
-		}
-
-		if (!userRepo.usernameExists("jd")) {
-			u3 = new User("jd", "jd", "jd@jd", "jd", "jd", new Date(697887155L), Arrays.asList(RoleEnum.ROLE_USER));
-			entityManager.persist(u3);
-		}
-	}
-
-	Profil profil;
-	Profil profil1;
-	Profil profil2;
-
-	void createProfiles() {
-
-		profil = new Profil();
-		profil.setPoitrine(10.);
-		profil.setTaille(10.);
-		profil.setHanche(10.);
-		profil.setCuisse(10.);
-		profil.setBras(10.);
-		profil.setObj("cest quoi");
-		profil.setClient(u1);
-
-		entityManager.persist(profil);
-
-		profil1 = new Profil();
-		profil1.setPoitrine(20.);
-		profil1.setTaille(20.);
-		profil1.setHanche(20.);
-		profil1.setCuisse(20.);
-		profil1.setBras(20.);
-		profil1.setObj("cest quoi");
-		profil1.setClient(u2);
-
-		entityManager.persist(profil1);
-
-		profil2 = new Profil();
-		profil2.setPoitrine(30.);
-		profil2.setTaille(30.);
-		profil2.setHanche(30.);
-		profil2.setCuisse(30.);
-		profil2.setBras(30.);
-		profil2.setObj("cest quoi");
-		profil2.setClient(u3);
-
-		entityManager.persist(profil2);
-
-	}
-
-	Programme programme;
-	Programme programme1;
-	Programme programme2;
-
-	void createProgrammes() {
-
-		programme = new Programme();
-		programme.setNom("prog1");
-		programme.setType(TypeProgramme.NORMAL);
-
-		programme1 = new Programme();
-		programme1.setNom("prog2");
-		programme1.setType(TypeProgramme.PERSONNALISE);
-
-		programme2 = new Programme();
-		programme2.setNom("prog3");
-		programme2.setType(TypeProgramme.NORMAL);
-
-		entityManager.persist(programme);
-		entityManager.persist(programme1);
-		entityManager.persist(programme2);
-
-	}
-
-	Seance seance;
-	Seance seance2;
-	SeanceProgramme sp11;
-	SeanceProgramme sp12;
-	SeanceProgramme sp21;
-	SeanceProgramme sp32;
-	SeanceProgramme sp32_;
-
-	SeanceProgramme sp2;
-	SeanceProgramme sp3;
-	SeanceProgramme sp4;
-	SeanceProgramme sp5;
-
-	void createSeances() {
-
-		seance = new Seance();
-		seance2 = new Seance();
-		seance.setType(TypeSeance.BILAN);
-		seance2.setType(TypeSeance.NORMAL);
-
-		sp11 = new SeanceProgramme();
-		sp12 = new SeanceProgramme();
-		sp21 = new SeanceProgramme();
-		sp32 = new SeanceProgramme();
-		sp32_ = new SeanceProgramme();
-
-		sp11.setProgramme(programme);
-		sp11.setSeance(seance);
-		sp11.setOrdreSeance(1);
-
-		sp12.setProgramme(programme);
-		sp12.setSeance(seance2);
-		sp12.setOrdreSeance(2);
-
-		sp21.setProgramme(programme1);
-		sp21.setSeance(seance);
-		sp21.setOrdreSeance(1);
-
-		sp32.setProgramme(programme2);
-		sp32.setSeance(seance2);
-		sp32.setOrdreSeance(1);
-
-		sp32_.setProgramme(programme2);
-		sp32_.setSeance(seance2);
-		sp32_.setOrdreSeance(2);
-
-		entityManager.persist(seance);
-		entityManager.persist(seance2);
-		entityManager.persist(sp11);
-		entityManager.persist(sp12);
-		entityManager.persist(sp21);
-		entityManager.persist(sp32);
-		entityManager.persist(sp32_);
-
-	}
-
 	Periode periode;
 	Periode periode2;
 
 	@Transactional(rollbackFor = Exception.class)
-	public void createInstance(List<User> users) {
+	public void createInstance() {
+
+		createUsers();
+
+		createProfiles();
 
 		createProgrammes();
 
@@ -199,10 +58,16 @@ public class TestRepository {
 
 		createPeriodes();
 
-		createProfiles();
-
 		createExercices();
 
+		affectProgrammes();
+	}
+
+	private void affectProgrammes() {
+
+		programmeService.affecterProgrammeClient(u1, programme);
+		programmeService.affecterProgrammeClient(u2, programme2);
+		programmeService.affecterProgrammeClient(u2, programme1);
 	}
 
 	Exercice exercice;
@@ -398,4 +263,153 @@ public class TestRepository {
 		// entityManager.persist(notification3);
 
 	}
+
+	@Transactional
+	public void createUsers() {
+
+		if (!userRepo.usernameExists("admin")) {
+			admin = new User("admin", "admin", "admin@admin", "admin", "usadminer", new Date(634815155L),
+					Arrays.asList(RoleEnum.values()));
+			entityManager.persist(admin);
+		}
+
+		if (!userRepo.usernameExists("chleo")) {
+			u1 = new User("chleo", "chleo", "chleo@chleo", "chleo", "chleo", new Date(634815155L),
+					Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u1);
+		}
+
+		if (!userRepo.usernameExists("georges")) {
+			u2 = new User("georges", "georges", "georges@georges", "georges", "georges", new Date(697887155L),
+					Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u2);
+		}
+
+		if (!userRepo.usernameExists("jd")) {
+			u3 = new User("jd", "jd", "jd@jd", "jd", "jd", new Date(697887155L), Arrays.asList(RoleEnum.ROLE_USER));
+			entityManager.persist(u3);
+		}
+	}
+
+	Profil profil;
+	Profil profil1;
+	Profil profil2;
+
+	void createProfiles() {
+
+		profil = new Profil();
+		profil.setPoitrine(10.);
+		profil.setTaille(10.);
+		profil.setHanche(10.);
+		profil.setCuisse(10.);
+		profil.setBras(10.);
+		profil.setObj("cest quoi");
+		profil.setClient(u1);
+
+		entityManager.persist(profil);
+
+		profil1 = new Profil();
+		profil1.setPoitrine(20.);
+		profil1.setTaille(20.);
+		profil1.setHanche(20.);
+		profil1.setCuisse(20.);
+		profil1.setBras(20.);
+		profil1.setObj("cest quoi");
+		profil1.setClient(u2);
+
+		entityManager.persist(profil1);
+
+		profil2 = new Profil();
+		profil2.setPoitrine(30.);
+		profil2.setTaille(30.);
+		profil2.setHanche(30.);
+		profil2.setCuisse(30.);
+		profil2.setBras(30.);
+		profil2.setObj("cest quoi");
+		profil2.setClient(u3);
+
+		entityManager.persist(profil2);
+
+	}
+
+	Programme programme;
+	Programme programme1;
+	Programme programme2;
+
+	void createProgrammes() {
+
+		programme = new Programme();
+		programme.setNom("prog1");
+		programme.setType(TypeProgramme.NORMAL);
+
+		programme1 = new Programme();
+		programme1.setNom("prog2");
+		programme1.setType(TypeProgramme.PERSONNALISE);
+
+		programme2 = new Programme();
+		programme2.setNom("prog3");
+		programme2.setType(TypeProgramme.NORMAL);
+
+		entityManager.persist(programme);
+		entityManager.persist(programme1);
+		entityManager.persist(programme2);
+
+	}
+
+	Seance seance;
+	Seance seance2;
+	SeanceProgramme sp11;
+	SeanceProgramme sp12;
+	SeanceProgramme sp21;
+	SeanceProgramme sp32;
+	SeanceProgramme sp32_;
+
+	SeanceProgramme sp2;
+	SeanceProgramme sp3;
+	SeanceProgramme sp4;
+	SeanceProgramme sp5;
+
+	void createSeances() {
+
+		seance = new Seance();
+		seance2 = new Seance();
+		seance.setType(TypeSeance.BILAN);
+		seance2.setType(TypeSeance.NORMAL);
+
+		sp11 = new SeanceProgramme();
+		sp12 = new SeanceProgramme();
+		sp21 = new SeanceProgramme();
+		sp32 = new SeanceProgramme();
+		sp32_ = new SeanceProgramme();
+
+		sp11.setProgramme(programme);
+		sp11.setSeance(seance);
+		sp11.setOrdreSeance(1);
+
+		sp12.setProgramme(programme);
+		sp12.setSeance(seance2);
+		sp12.setOrdreSeance(2);
+
+		sp21.setProgramme(programme1);
+		sp21.setSeance(seance);
+		sp21.setOrdreSeance(1);
+
+		sp32.setProgramme(programme2);
+		sp32.setSeance(seance2);
+		sp32.setOrdreSeance(1);
+
+		sp32_.setProgramme(programme2);
+		sp32_.setSeance(seance2);
+		sp32_.setOrdreSeance(2);
+
+		entityManager.persist(seance);
+		entityManager.persist(seance2);
+		entityManager.persist(sp11);
+		entityManager.persist(sp12);
+		entityManager.persist(sp21);
+		entityManager.persist(sp32);
+		entityManager.persist(sp32_);
+
+	}
+
 }

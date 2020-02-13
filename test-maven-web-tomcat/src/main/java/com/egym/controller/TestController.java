@@ -65,12 +65,8 @@ public class TestController {
 	}
 
 	private void createInstances() {
-		testRepo.createUsers();
-		User u1 = userRepo.getUserByUsername("chleo");
-		User u2 = userRepo.getUserByUsername("georges");
-		User u3 = userRepo.getUserByUsername("jd");
 
-		testRepo.createInstance(Arrays.asList(u1, u2, u3));
+		testRepo.createInstance();
 	}
 
 	@GetMapping(value = "/ajouterProgramme")
