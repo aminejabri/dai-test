@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.egym.entity.Bilan;
 import com.egym.entity.ExerciceClient;
+import com.egym.entity.PeriodeClient;
 import com.egym.entity.PeriodeProgramme;
 import com.egym.entity.Programme;
 import com.egym.entity.ProgrammeClient;
@@ -49,7 +50,7 @@ public class ProgrammeService {
 
 		List<PeriodeProgramme> periodesProgramme = periodeRepository.getPeriodesByProgrammeId(programme.getId());
 
-		createPeriodesProgramme(periodesProgramme, client);
+		createPeriodesClient(periodesProgramme, client);
 
 		List<Integer> idSeances = seanceProgrammes.stream().map(x -> x.getSeance().getId())
 				.collect(Collectors.toList());
@@ -65,16 +66,17 @@ public class ProgrammeService {
 	 * @param periodesProgramme
 	 * @param client
 	 */
-	private void createPeriodesProgramme(List<PeriodeProgramme> periodesProgramme, User client) {
+	private void createPeriodesClient(List<PeriodeProgramme> periodesProgramme, User client) {
 
 		for (PeriodeProgramme periodeProgramme : periodesProgramme) {
 
-			// ccreation dune table programme service
+			PeriodeClient periodeClient = new PeriodeClient();
+			periodeClient.setOrdrePeriode(periodeProgramme.getOrdrePeriode());
+			periodeClient.setPeriode(periodeProgramme.getPeriode());
+			periodeClient.setProgramme(periodeProgramme.getProgramme());
+			periodeClient.setUser(client);
+			entityManager.persist(periodeClient);
 		}
-	}
-
-	private void createPeriodes() {
-
 	}
 
 	/**

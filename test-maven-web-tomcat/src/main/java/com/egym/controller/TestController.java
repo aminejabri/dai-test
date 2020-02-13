@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,6 +39,7 @@ import com.egym.repositories.UserRepository;
 
 @Controller
 @RequestMapping(value = "/test")
+@Transactional
 public class TestController {
 
 	@PersistenceContext
@@ -147,7 +149,6 @@ public class TestController {
 		pp.setPeriode(periode);
 		pp.setProgramme(programme);
 		pp.setOrdrePeriode(1);
-		pp.setUser(u1);
 
 		entityManager.persist(pp);
 
