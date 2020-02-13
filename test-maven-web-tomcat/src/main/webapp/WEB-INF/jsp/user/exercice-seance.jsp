@@ -12,9 +12,9 @@
 			<div class="col-md-12">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
-						<li><a href="/user/profil">Profile</a></li>
-						<li class="active"><a href="#timeline">Programmes</a></li>
-						<li><a href="http://localhost:8080/user/profil" data-toggle="tab">Settings</a></li>
+						<li class="active"><a href="/user/profil">Profile</a></li>
+
+
 					</ul>
 					<!-- /.box -->
 
@@ -25,46 +25,68 @@
 						<!-- The timeline -->
 						<!-- timeline time label -->
 
-						<div class="box-body box-profile">
 
-							<!-- /.box-header -->
-							<div class="box box-default" data-select2-id="16">
-						
-							
-								<br>
-								<div class="box box-default" data-select2-id="16">
-									<div class="box-header with-border">
-										<h3 class="box-title">Liste des des exercices</h3>
-										<div class="box-tools pull-right">
-											<button type="button" class="btn btn-box-tool"
-												data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
-										</div>
-									</div>
-									<div class="box-body">
 
-										<table class="table table-condensed">
-										
-											<tr>
+						<!-- /.box-header -->
 
-												<th> </th>
-												<th>Action</th>
-											</tr>
-											<c:forEach items="${myModel}" var="exerciceClient"
-											varStatus="status">
-											<tr>
-												<td>Id Exercice : ${exerciceClient.id}</td>
-											
-												
-											</tr>
-										</c:forEach>
-										</table>
-									</div>
+
+						<br>
+						<div class="box box-default" data-select2-id="16">
+							<div class="box-header with-border">
+								<h3 class="box-title">Liste des des exercices</h3>
+								<div class="box-tools pull-right">
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									
 								</div>
+							</div>
+							<div class="box-body">
+								<form>
+									<input type="button" value="Retour" onclick="history.go(-1)">
+								</form>
+								<table class="table table-condensed">
 								
+								<div class="col-md-12">
+						          <!-- The time line -->
+						          <ul class="timeline">
+						            <!-- timeline time label -->
+						            <li class="time-label">
+						                 
+						            </li>
+									
+									<c:forEach items="${myModel}" var="exerciceClient" 	varStatus="status">
+										<li>
+					              <i class="fa fa-bicycle bg-blue"></i>
+					
+					              <div class="timeline-item">
+					                <span class="time"></span>
+					
+					                <h3 class="timeline-header">Exercice : ${exerciceClient.exercice.nom}  </h3>
+					
+					                <div class="timeline-body">
+					                  Description: ${exerciceClient.exercice.description}
+					                </div>
+					                <div class="timeline-body">
+					                  Note: ${exerciceClient.note}
+					                </div>
+					               <div class="timeline-body">
+					                  Commentaire: ${exerciceClient.commentaire}
+					                </div>
+					              </div>
+					            </li>
+							
+															
+									</c:forEach>
+									   </ul>
+        							</div>
+								</table>
 							</div>
 						</div>
+
+
+
 
 					</div>
 				</div>

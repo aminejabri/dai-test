@@ -30,9 +30,9 @@
     <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://etu-web2.ut-capitole.fr:3306/db_21301346" />
-        <property name="user" value="21301346" />
-        <property name="password" value="N00162" />
+        <property name="jdbcUrl" value="jdbc:mysql://etu-web2.ut-capitole.fr:3306/db_21808677_2" />
+        <property name="user" value="21808677" />
+        <property name="password" value="T00HZ3" />
         <!-- these are connection pool properties for C3P0 -->
         <property name="minPoolSize" value="5" />
         <property name="maxPoolSize" value="20" />

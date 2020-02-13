@@ -1,3 +1,4 @@
+<%@ include file="../../layout/taglib.jsp"%>
 <div class="content-wrapper" style="min-height: 1135.67px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -13,7 +14,7 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#activity" data-toggle="tab">Profile</a></li>
 						<li><a href="/programme/list" >Programmes</a></li>
-						<li><a href="/programme/list" >Settings</a></li>
+						<li><a href="/programme/list" >Bilan</a></li>
 					</ul>
 						<div class="active tab-pane" id="activity">
 
@@ -24,7 +25,7 @@
 									alt="User profile picture">
 
 								<h3 class="profile-username text-center">
-									${utilisateur.username}</h3>
+									${myModel[0].username}</h3>
 
 								<p class="text-muted text-center">Software Engineer</p>
 								<div class="box box-primary">
@@ -49,11 +50,11 @@
 											</tr>
 											<tr>
 												<td>Nom :</td>
-												<td>${utilisateur.lastname}</td>
+												<td>${myModel[0].lastname}</td>
 											</tr>
 											<tr>
 												<td>Prénom :</td>
-												<td>${utilisateur.firstname}</td>
+												<td>${myModel[0].firstname}</td>
 											</tr>
 											<tr>
 												<td>Age :</td>
@@ -61,7 +62,7 @@
 											</tr>
 											<tr>
 												<td>Email :</td>
-												<td>${utilisateur.email}</td>
+												<td>${myModel[0].email}</td>
 											</tr>
 										</table>
 									</div>
@@ -85,23 +86,23 @@
 											</tr>
 											<tr>
 												<td>Taille :</td>
-												<td>${utilisateur.profil.taille}</td>
+												<td>${myModel[0].profil.taille}</td>
 											</tr>
 											<tr>
 												<td>Poitrine :</td>
-												<td>${utilisateur.profil.poitrine}</td>
+												<td>${myModel[0].profil.poitrine}</td>
 											</tr>
 											<tr>
 												<td>Hanche :</td>
-												<td>${utilisateur.profil.hanche}</td>
+												<td>${myModel[0].profil.hanche}</td>
 											</tr>
 											<tr>
 												<td>Cuisse :</td>
-												<td>${utilisateur.profil.cuisse}</td>
+												<td>${myModel[0].profil.cuisse}</td>
 											</tr>
 											<tr>
 												<td>Bras :</td>
-												<td>${utilisateur.profil.bras}</td>
+												<td>${myModel[0].profil.bras}</td>
 											</tr>
 											<tr>
 											</tr>

@@ -119,13 +119,17 @@ public class SeanceRepository {
 				.getResultList();
 	}
 
-	public List<ExerciceClient> getExerciceBySeanceId(Integer id) {
+	public List<ExerciceClient> getExerciceClientConnecteBySeanceId(Integer id) {
 
 		StringBuilder query = new StringBuilder();
-		query.append("select ec from ExerciceClient ec where ec.seance.id = :id");
+		query.append("select ec from ExerciceClient ec");
+		query.append(
+				" inner join SeanceClient sc on sc.seance =  ec.seance and sc.ordreSeance = ec.ordreSeance and sc.programme =  ec.programme ");
+		query.append("where ec.client.idUser = :clientId ");
+		query.append("and sc.id = :id");
 
 		return (List<ExerciceClient>) entityManager.createQuery(query.toString()).setParameter("id", id)
-				.getResultList();
+				.setParameter("clientId", userContext.getUser().getIdUser()).getResultList();
 	}
 
 }

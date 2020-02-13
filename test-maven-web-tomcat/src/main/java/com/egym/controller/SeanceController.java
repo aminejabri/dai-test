@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import com.egym.repositories.UserRepository;
 import com.egym.utils.UserContext;
 
 @Controller
+@Transactional
 @RequestMapping(value = "/seance")
 public class SeanceController {
 
@@ -30,12 +32,11 @@ public class SeanceController {
 	@RequestMapping(value = ("/exercice/{id}"), method = RequestMethod.GET)
 	public ModelAndView getlisteExercice(@PathVariable(value = "id") Integer id) {
 
-		List<ExerciceClient> exerciceClient = seanceRepository.getExerciceBySeanceId(id);
+		List<ExerciceClient> exerciceClient = seanceRepository.getExerciceClientConnecteBySeanceId(id);
 
 		// pour chaque element x de la liste seanceClient on appelle un getter de
 		// l'element seance pour loader ses attribut de la base
-		// seanceClient.forEach(x -> x.getSeance().getId());
-
+		exerciceClient.forEach(x -> x.getExercice().getNom());
 		return new ModelAndView("exercice-seance", "myModel", exerciceClient);
 	}
 }

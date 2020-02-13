@@ -14,7 +14,7 @@
 					<ul class="nav nav-tabs">
 						<li><a href="/user/profil">Profile</a></li>
 						<li class="active"><a href="#timeline">Programmes</a></li>
-						<li><a href="http://localhost:8080/user/profil" data-toggle="tab">Settings</a></li>
+						<li><a href="http://localhost:8080/user/profil" data-toggle="tab">Bilan</a></li>
 					</ul>
 					<!-- /.box -->
 
