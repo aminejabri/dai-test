@@ -48,7 +48,7 @@
 										
 											<tr>
 
-												<th>Séance</th>
+												<th> </th>
 												<th>Action</th>
 											</tr>
 											<c:forEach items="${myModel}" var="exerciceClient"
