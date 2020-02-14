@@ -126,7 +126,7 @@ public class TestController {
 
 		Bilan bilan = new Bilan();
 		bilan.setFreqCardiaqueRepos(10.);
-		bilan.setFreqCardiaqueCible(10.);
+		// bilan.setFreqCardiaqueCible();
 		bilan.setFreqCardiaqueMax(10.);
 		bilan.setPoid(10.);
 		bilan.setIndiceDickson(10.);

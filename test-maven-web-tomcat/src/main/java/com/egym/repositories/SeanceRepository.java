@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.egym.dto.ExercieClientSeance;
 import com.egym.entity.Bilan;
 import com.egym.entity.Exercice;
 import com.egym.entity.ExerciceClient;
@@ -117,6 +118,60 @@ public class SeanceRepository {
 
 		return (List<SeanceExercice>) entityManager.createQuery(query.toString()).setParameter("idSeances", idSeances)
 				.getResultList();
+	}
+
+	public List<ExercieClientSeance> getExercieClientSeanceParSeanceId(Integer idSeance) {
+
+		StringBuilder query = new StringBuilder();
+
+		query.append("select new com.egym.dto.ExercieClientSeance(ec, sc) from ExerciceClient ec ");
+		query.append(
+				" inner join SeanceClient sc on sc.seance =  ec.seance and sc.ordreSeance = ec.ordreSeance and sc.programme =  ec.programme ");
+		query.append("where ec.client.idUser = :clientId ");
+		query.append("and sc.id = :id");
+		return (List<ExercieClientSeance>) entityManager.createQuery(query.toString())
+				.setParameter("clientId", userContext.getUser().getIdUser()).setParameter("id", idSeance)
+				.getResultList();
+	}
+
+	public List<ExerciceClient> getExercicesClientParSeanceId(Integer idSeance) {
+
+		StringBuilder query = new StringBuilder();
+
+		query.append("select ec from ExerciceClient ec ");
+		query.append(
+				" inner join SeanceClient sc on sc.seance =  ec.seance and sc.ordreSeance = ec.ordreSeance and sc.programme =  ec.programme ");
+		query.append("where ec.client.idUser = :clientId ");
+		query.append("and sc.id = :id");
+		return (List<ExerciceClient>) entityManager.createQuery(query.toString())
+				.setParameter("clientId", userContext.getUser().getIdUser()).setParameter("id", idSeance)
+				.getResultList();
+	}
+
+	public Bilan getBilanBySeanceClientId(Integer idSeanceClient) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select b from Bilan b ");
+		query.append("inner join  SeanceClient s on b.id = s.bilan.id ");
+		query.append("inner join User u  on s.client.id = u.idUser ");
+		query.append("where u.idUser = :clientId ");
+		query.append("and s.id = :idSeanceClient ");
+		return (Bilan) entityManager.createQuery(query.toString())
+				.setParameter("clientId", userContext.getUser().getIdUser())
+				.setParameter("idSeanceClient", idSeanceClient).getSingleResult();
+	}
+
+	public Bilan getExercicesBilanBySeanceClientId(Integer idSeanceClient) {
+
+		StringBuilder query = new StringBuilder();
+		query.append("select b from Bilan b ");
+		query.append("inner join  SeanceClient s on b.id = s.bilan.id ");
+		query.append("inner join User u  on s.client.id = u.idUser ");
+		query.append("where u.idUser = :userId ");
+		query.append("and s.id = :idSeanceClient ");
+		return (Bilan) entityManager.createQuery(query.toString())
+				.setParameter("clientId", userContext.getUser().getIdUser())
+				.setParameter("idSeanceClient", idSeanceClient).getSingleResult();
 	}
 
 	public List<ExerciceClient> getExerciceClientConnecteBySeanceId(Integer id) {
