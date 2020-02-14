@@ -55,7 +55,7 @@
         <put-list-attribute name="javascripts">
             <add-attribute value="/resources/js/app.min.js" />
             <add-attribute value="/resources/js/demo.js" />
-            <add-attribute value="/resources/js/notification-coach.js" />
+            <add-attribute value="/resources/js/app-egym.js" />
         </put-list-attribute>
 	</definition>
 	
@@ -95,9 +95,6 @@
 		<put-attribute name="title" value="Programme" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/programme.jsp" />
 		<put-attribute name="current" value="programme" />
-		 <put-list-attribute name="javascripts">
-            <add-attribute value="/resources/app/user/exercice-seance.js" />
-          </put-list-attribute>
 	</definition>
 	
 	<definition name="home" extends="common">

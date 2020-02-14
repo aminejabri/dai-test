@@ -40,7 +40,7 @@ public class ProgrammeController {
 		List<SeanceClient> seanceClient = seanceRepository.getSeanceProgrammeByUserId();
 
 		// pour chaque element x de la liste seanceClient on appelle un getter de
-		// l'element seance pour loader ses attribut de la base
+		// l'element séance pour loader ses attribut de la base
 		seanceClient.forEach(x -> x.getSeance().getId());
 
 		return new ModelAndView("programme", "myModel", seanceClient);
