@@ -71,4 +71,11 @@ public class BilanController {
 
 	}
 
+	@RequestMapping(value = ("/form"), method = RequestMethod.GET)
+	public ModelAndView setBilanPage() {
+
+		return new ModelAndView("bilanForm");
+
+	}
+
 }

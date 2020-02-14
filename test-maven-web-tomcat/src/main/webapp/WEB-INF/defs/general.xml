@@ -55,7 +55,7 @@
         <put-list-attribute name="javascripts">
             <add-attribute value="/resources/js/app.min.js" />
             <add-attribute value="/resources/js/demo.js" />
-            <add-attribute value="/resources/js/notification-coach.js" />
+           
         </put-list-attribute>
 	</definition>
 	
@@ -78,12 +78,22 @@
 		<put-attribute name="bilan" value="bilan" />
 	</definition>
 	
+	<definition name="bilanForm" extends="common">
+		<put-attribute name="title" value="Bilan Form" />
+		<put-attribute name="body" value="/WEB-INF/jsp/bilan/bilanForm.jsp" />
+		<put-attribute name="bilanForm" value="bilanForm" />
+ 		<put-list-attribute name="javascripts">
+            <add-attribute value="/resources/app/user/validerbilan.js" />
+          </put-list-attribute>
+	</definition>
+	
 	<definition name="profil" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
 		<put-attribute name="body" value="/WEB-INF/jsp/user/profil.jsp" />
 		<put-attribute name="profil" value="profil" />
 		
 	</definition>
+	
 	
 	<definition name="test" extends="common">
 		<put-attribute name="title" value="Tracker Tool" />
