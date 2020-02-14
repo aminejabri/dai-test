@@ -58,13 +58,12 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li id="notificationCoach" class="dropdown messages-menu">
+          <li id="notificationUtilisateur" class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">${notificationcoach.countNotif} </span>
+              <span id="notification-span" class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -81,10 +80,10 @@
                         </c:choose>
                       </div>
                       <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                       
+                       <h4 id="" class="label label-success"></h4><p>	nom - prenom</p>
+                       <span id="nompersone" class="label label-success"></span>
                       </h4>
-                      <p>Why not buy a new awesome theme?</p>
                     </a>
                   </li>
                   <!-- end message -->
@@ -152,7 +151,7 @@
                       <img src='<spring:url value="/resources/profile-pictures/img.jpg" />' class="user-image" alt="User Image">
                   </c:otherwise>
               </c:choose>
-              <span class="hidden-xs"><c:out value="${user.firstName} ${user.lastName}" /></span>
+              <span class="hidden-xs"><!--  c:out value="${user.firstName} ${user.lastName}" /></span>-->
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->

@@ -27,7 +27,7 @@
 				contentType : "application/json",
 				dataType : 'json',
 				timeout : 100000,
-				url: "/api/user/username-exists",
+				url: "/api/user/inscription",
 				data:JSON.stringify() 
 				
 		})
@@ -35,8 +35,7 @@
 		  
 			  if (msg) {
 			  	alert( "Data Saved: " + msg);
-			  } else {
-				 $( "#inscription-from" ).submit();
+
 			  }
 
 		  });

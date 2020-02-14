@@ -23,7 +23,5 @@ public class NotificationRepository {
 
 		return (Long) entityManager.createQuery("select count (*) from Notification n where n.recepteur = :recepteur")
 				.setParameter("recepteur", userContext.getUser()).getSingleResult();
-
 	}
-
 }
